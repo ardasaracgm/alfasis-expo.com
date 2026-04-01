@@ -3,152 +3,890 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALFASIS · SAHA EXPO 2026</title>
-
+<title>ALFASIS · SAHA EXPO 2026 Istanbul · May 5–9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background:#f5f6f8;
-  margin:0;
-}
+  :root {
+    --bg: #f5f6f8;
+    --white: #ffffff;
+    --surface: #eef0f4;
+    --border: #dde0e8;
+    --border-dark: #c2c8d5;
+    --blue: #1b4fff;
+    --blue-dark: #0f34cc;
+    --blue-light: #e8eeff;
+    --blue-mid: #3d64ff;
+    --navy: #0a1640;
+    --text: #0d1526;
+    --muted: #5a6478;
+    --muted-light: #9aa3b8;
+    --red: #e02020;
+    --font-display: 'DM Serif Display', serif;
+    --font-ui: 'DM Sans', sans-serif;
+    --font-mono: 'Space Grotesk', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
 
-nav {
-  position:fixed;
-  top:0;
-  width:100%;
-  background:#fff;
-  padding:15px 30px;
-  display:flex;
-  justify-content:space-between;
-  border-bottom:1px solid #ddd;
-}
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 68px; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: var(--font-mono); font-weight: 700; font-size: 20px; letter-spacing: 3px; color: var(--navy); text-transform: uppercase; }
+  .nav-logo span { color: var(--blue); }
+  .nav-center { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; }
+  .live-dot { width: 7px; height: 7px; background: var(--blue); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+  .nav-cta { background: var(--blue); color: #fff; font-family: var(--font-mono); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; padding: 10px 24px; border: none; cursor: pointer; text-decoration: none; border-radius: 2px; transition: background .2s; }
+  .nav-cta:hover { background: var(--blue-dark); }
 
-.hero {
-  margin-top:80px;
-  padding:40px;
-}
+  /* HERO */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 100px 52px 60px; gap: 60px; background: var(--white); position: relative; overflow: hidden; }
+  .hero::after { content:''; position:absolute; top:-200px; right:-200px; width:700px; height:700px; background:radial-gradient(circle,rgba(27,79,255,.07) 0%,transparent 70%); pointer-events:none; }
+  .hero-eyebrow { display:inline-flex; align-items:center; gap:8px; background:var(--blue-light); color:var(--blue); font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; border-radius:2px; margin-bottom:28px; opacity:0; animation:fadeUp .7s .1s forwards; }
+  .hero-eyebrow::before { content:''; width:6px; height:6px; background:var(--blue); border-radius:50%; animation:pulse 1.5s infinite; }
+  .hero-title { font-family:var(--font-display); font-size:clamp(44px,5.5vw,84px); line-height:1.05; color:var(--navy); margin-bottom:24px; opacity:0; animation:fadeUp .7s .25s forwards; }
+  .hero-title em { font-style:italic; color:var(--blue); }
+  .hero-desc { font-size:17px; color:var(--muted); line-height:1.7; margin-bottom:40px; max-width:480px; opacity:0; animation:fadeUp .7s .4s forwards; }
+  .hero-actions { display:flex; gap:12px; flex-wrap:wrap; opacity:0; animation:fadeUp .7s .55s forwards; }
+  .btn-primary { background:var(--blue); color:#fff; font-family:var(--font-mono); font-weight:700; font-size:14px; letter-spacing:1px; text-transform:uppercase; padding:16px 36px; border:none; cursor:pointer; text-decoration:none; border-radius:2px; transition:background .2s,transform .15s; display:inline-block; }
+  .btn-primary:hover { background:var(--blue-dark); transform:translateY(-1px); }
+  .btn-outline { border:1.5px solid var(--border-dark); color:var(--text); font-family:var(--font-mono); font-weight:500; font-size:14px; letter-spacing:1px; text-transform:uppercase; padding:16px 36px; cursor:pointer; text-decoration:none; border-radius:2px; transition:border-color .2s,color .2s; display:inline-block; background:transparent; }
+  .btn-outline:hover { border-color:var(--blue); color:var(--blue); }
 
-.btn {
-  background:#1b4fff;
-  color:#fff;
-  padding:12px 20px;
-  text-decoration:none;
-  display:inline-block;
-}
+  /* COUNTDOWN CARD */
+  .hero-right { opacity:0; animation:fadeUp .7s .5s forwards; }
+  .countdown-card { background:var(--navy); color:#fff; padding:48px 40px; border-radius:4px; position:relative; overflow:hidden; }
+  .countdown-card::before { content:''; position:absolute; top:-80px; right:-80px; width:250px; height:250px; background:radial-gradient(circle,rgba(27,79,255,.35) 0%,transparent 70%); }
+  .cd-top { font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:32px; position:relative; }
+  .cd-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; margin-bottom:36px; }
+  .cd-item { position:relative; text-align:center; }
+  .cd-item:not(:last-child)::after { content:':'; position:absolute; right:-4px; top:50%; transform:translateY(-60%); font-family:var(--font-mono); font-size:32px; color:rgba(255,255,255,.2); }
+  .cd-num { font-family:var(--font-mono); font-weight:700; font-size:clamp(36px,4vw,52px); color:#fff; display:block; line-height:1; margin-bottom:6px; }
+  .cd-lbl { font-family:var(--font-mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.4); }
+  .cd-info { border-top:1px solid rgba(255,255,255,.1); padding-top:24px; display:flex; flex-direction:column; gap:10px; }
+  .cd-row { display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,.7); }
+  .cd-icon { font-size:15px; flex-shrink:0; }
 
-.toast {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#000;
-  color:#fff;
-  padding:10px 20px;
-  display:none;
-}
-.toast.show { display:block; }
+  /* STATS */
+  .stats-strip { display:grid; grid-template-columns:repeat(4,1fr); background:var(--blue); }
+  .stat-block { padding:36px 32px; border-right:1px solid rgba(255,255,255,.15); text-align:center; }
+  .stat-block:last-child { border-right:none; }
+  .stat-num { font-family:var(--font-mono); font-weight:700; font-size:44px; color:#fff; line-height:1; margin-bottom:6px; }
+  .stat-lbl { font-family:var(--font-ui); font-size:13px; color:rgba(255,255,255,.65); }
 
+  /* SECTION */
+  .section { padding:96px 52px; max-width:1300px; margin:0 auto; }
+  .eyebrow { font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--blue); margin-bottom:12px; }
+  .sec-title { font-family:var(--font-display); font-size:clamp(36px,4vw,60px); color:var(--navy); line-height:1.1; margin-bottom:48px; }
+
+  /* FILTER */
+  .filter-wrap { display:flex; gap:4px; margin-bottom:36px; background:var(--surface); padding:4px; border-radius:4px; width:fit-content; flex-wrap:wrap; }
+  .ftab { font-family:var(--font-mono); font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; padding:10px 22px; border:none; background:transparent; color:var(--muted); cursor:pointer; border-radius:2px; transition:all .2s; white-space:nowrap; }
+  .ftab.active { background:var(--white); color:var(--blue); box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .ftab:hover:not(.active) { color:var(--text); }
+
+  /* PRODUCT GRID */
+  .pgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
+  .pcard { background:var(--white); border:1px solid var(--border); border-radius:4px; overflow:hidden; transition:box-shadow .25s,transform .2s,border-color .2s; }
+  .pcard:hover { box-shadow:0 8px 32px rgba(27,79,255,.12); transform:translateY(-3px); border-color:rgba(27,79,255,.3); }
+  .pimg-wrap { overflow:hidden; position:relative; background:var(--surface); height:200px; }
+  .pimg { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
+  .pcard:hover .pimg { transform:scale(1.05); }
+  .pcat-pill { position:absolute; top:12px; left:12px; background:var(--blue); color:#fff; font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:4px 10px; border-radius:2px; }
+  .pbody { padding:22px; }
+  .pname { font-family:var(--font-mono); font-weight:700; font-size:16px; color:var(--navy); margin-bottom:4px; }
+  .ptag { font-size:13px; color:var(--blue); font-weight:500; margin-bottom:10px; }
+  .pdesc { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:14px; }
+  .pspecs { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:16px; }
+  .spec-chip { font-family:var(--font-mono); font-size:10px; font-weight:600; background:var(--blue-light); color:var(--blue); padding:3px 10px; border-radius:2px; }
+  .plink { font-family:var(--font-mono); font-size:12px; font-weight:700; letter-spacing:1px; color:var(--blue); text-transform:uppercase; text-decoration:none; border-bottom:1.5px solid transparent; transition:border-color .2s; }
+  .plink:hover { border-bottom-color:var(--blue); }
+  .phidden { display:none !important; }
+
+  /* MEETING */
+  .meeting-bg { background:var(--white); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .meeting-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:72px; align-items:start; }
+  .mside p { font-size:16px; color:var(--muted); line-height:1.8; margin-bottom:36px; }
+  .info-list { display:flex; flex-direction:column; gap:10px; }
+  .info-item { display:flex; gap:14px; align-items:flex-start; padding:14px 16px; background:var(--bg); border:1px solid var(--border); border-radius:3px; }
+  .ii-icon { font-size:17px; flex-shrink:0; margin-top:2px; }
+  .ii-label { font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue); margin-bottom:3px; }
+  .ii-val { font-size:14px; color:var(--text); font-weight:500; }
+
+  /* FORM */
+  .fcard { background:var(--white); border:1px solid var(--border); border-radius:4px; padding:40px; position:relative; }
+  .fcard-tag { position:absolute; top:-13px; left:24px; background:var(--blue); color:#fff; font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:4px 14px; border-radius:2px; }
+  .fg { margin-bottom:16px; }
+  .fl { display:block; font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+  .fi, .fsel, .fta { width:100%; border:1.5px solid var(--border); background:var(--bg); color:var(--text); font-family:var(--font-ui); font-size:15px; padding:11px 13px; border-radius:3px; outline:none; transition:border-color .2s,box-shadow .2s; appearance:none; }
+  .fi:focus,.fsel:focus,.fta:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(27,79,255,.1); }
+  .fsel { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231b4fff' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 13px center; cursor:pointer; }
+  .fta { resize:vertical; min-height:88px; }
+  .frow { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .fsub { width:100%; background:var(--blue); color:#fff; font-family:var(--font-mono); font-weight:700; font-size:14px; letter-spacing:2px; text-transform:uppercase; padding:15px; border:none; border-radius:3px; cursor:pointer; transition:background .2s; margin-top:4px; }
+  .fsub:hover { background:var(--blue-dark); }
+  .fsub:disabled { background:var(--border-dark); cursor:not-allowed; }
+
+  /* SUCCESS */
+  .success-msg { display:none; text-align:center; padding:36px 24px; }
+  .s-icon { font-size:48px; margin-bottom:16px; }
+  .success-msg h3 { font-family:var(--font-display); font-size:28px; color:var(--navy); margin-bottom:8px; }
+  .s-ref { display:inline-block; background:var(--blue-light); color:var(--blue); font-family:var(--font-mono); font-size:22px; font-weight:700; padding:10px 24px; border-radius:3px; margin:12px 0; letter-spacing:2px; }
+  .success-msg p { font-size:14px; color:var(--muted); }
+
+  /* QUEUE */
+  .queue-bg { background:var(--bg); }
+  .qheader { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:16px; }
+  .qbadge { display:inline-flex; align-items:center; gap:8px; background:var(--blue-light); color:var(--blue); font-family:var(--font-mono); font-size:12px; font-weight:700; letter-spacing:1px; padding:6px 14px; border-radius:20px; margin-top:8px; }
+  .admin-row { display:flex; gap:8px; align-items:center; }
+  .admin-inp { border:1.5px solid var(--border); background:var(--white); font-family:var(--font-mono); font-size:13px; padding:8px 12px; border-radius:3px; outline:none; width:140px; color:var(--text); transition:border-color .2s; }
+  .admin-inp:focus { border-color:var(--blue); }
+  .abtn { font-family:var(--font-mono); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:8px 16px; border:1.5px solid var(--border-dark); background:var(--white); color:var(--text); border-radius:3px; cursor:pointer; transition:all .2s; white-space:nowrap; }
+  .abtn:hover { border-color:var(--blue); color:var(--blue); }
+  .abtn.danger:hover { border-color:var(--red); color:var(--red); }
+
+  .qtable-wrap { overflow-x:auto; }
+  .qtable { width:100%; border-collapse:collapse; background:var(--white); border:1px solid var(--border); border-radius:4px; overflow:hidden; font-size:14px; }
+  .qtable thead { background:var(--navy); color:#fff; }
+  .qtable thead th { font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:14px 16px; text-align:left; white-space:nowrap; }
+  .qtable tbody tr { border-bottom:1px solid var(--border); transition:background .15s; }
+  .qtable tbody tr:last-child { border-bottom:none; }
+  .qtable tbody tr:hover { background:var(--blue-light); }
+  .qtable td { padding:13px 16px; vertical-align:middle; white-space:nowrap; }
+  .qtable td.wrap { white-space:normal; max-width:160px; }
+  .qnum { font-family:var(--font-mono); font-weight:700; color:var(--muted-light); font-size:13px; }
+  .qname { font-weight:600; color:var(--navy); }
+  .qorg { color:var(--muted); font-size:13px; }
+  .spill { display:inline-block; font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:4px 12px; border-radius:20px; }
+  .spill.pending { background:#fff8e1; color:#b07800; }
+  .spill.confirmed { background:#e3f4eb; color:#1a7a3e; }
+  .spill.cancelled { background:#fde8e8; color:var(--red); }
+
+  .qempty { text-align:center; padding:72px 24px; color:var(--muted); font-family:var(--font-mono); font-size:13px; letter-spacing:2px; text-transform:uppercase; border:1px solid var(--border); border-radius:4px; background:var(--white); }
+
+  .apanel { display:none; background:var(--white); border:1px solid var(--border); border-radius:4px; padding:18px 22px; margin-top:16px; align-items:center; gap:10px; flex-wrap:wrap; }
+  .apanel.visible { display:flex; }
+  .apanel-lbl { font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue); margin-right:4px; }
+
+  /* FOOTER */
+  footer { background:var(--navy); color:rgba(255,255,255,.7); padding:48px 52px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px; }
+  .flogo { font-family:var(--font-mono); font-weight:700; font-size:20px; letter-spacing:3px; color:#fff; text-transform:uppercase; }
+  .flogo span { color:var(--blue-mid); }
+  .fmid { font-size:13px; text-align:center; }
+  .fright { font-size:13px; text-align:right; }
+  .fright a { color:var(--blue-mid); text-decoration:none; }
+
+  /* TOAST */
+  .toast { position:fixed; bottom:28px; right:28px; background:var(--navy); color:#fff; padding:14px 22px; border-radius:4px; font-family:var(--font-mono); font-size:13px; letter-spacing:1px; z-index:9999; transform:translateY(80px); opacity:0; transition:all .3s; box-shadow:0 4px 20px rgba(0,0,0,.2); }
+  .toast.show { transform:none; opacity:1; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+
+
+  ::-webkit-scrollbar { width:6px; height:6px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--border-dark); border-radius:3px; }
+  ::-webkit-scrollbar-thumb:hover { background:var(--blue); }
+
+  @media(max-width:960px) {
+    .hero,.meeting-grid { grid-template-columns:1fr; }
+    .hero { min-height:auto; padding-top:100px; }
+    nav { padding:0 24px; }
+    .section { padding:60px 24px; }
+    .stats-strip { grid-template-columns:1fr 1fr; }
+    footer { padding:36px 24px; }
+    .fmid,.fright { text-align:left; }
+  }
 </style>
 </head>
-
 <body>
 
+<!-- NAV -->
 <nav>
-  <div>ALFASIS</div>
-  <a href="#meeting">Book</a>
+  <div class="nav-logo">ALFA<span>SIS</span></div>
+  <div class="nav-center"><div class="live-dot"></div>SAHA EXPO 2026 · Istanbul · May 5–9</div>
+  <a class="nav-cta" href="#meeting">Book a Meeting</a>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <h1>Defense Systems</h1>
-  <p>Meet us at SAHA EXPO</p>
-  <a class="btn" href="#meeting">Request Meeting</a>
-</div>
-
-<div id="meeting" style="padding:40px;">
-  <h2>Meeting Form</h2>
-
-  <form id="meetingForm">
-    <input type="text" id="name" placeholder="Name" required><br><br>
-    <input type="email" id="email" placeholder="Email" required><br><br>
-    <button type="submit">Submit</button>
-  </form>
-
-  <div id="success" style="display:none;">
-    <h3>Success!</h3>
+  <div>
+    <div class="hero-eyebrow">SAHA EXPO 2026 · Istanbul Fuar Merkezi (İFM)</div>
+    <h1 class="hero-title">Advanced<br><em>Defense</em><br>Systems</h1>
+    <p class="hero-desc">Alfasis presents its full portfolio of electronic warfare, counter-UAV jamming, and tactical drone systems at SAHA EXPO 2026. Meet our engineers. Schedule your private briefing.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#meeting">Request a Meeting →</a>
+      <a class="btn-outline" href="#products">View Portfolio</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="countdown-card">
+      <div class="cd-top">Fair Opens In</div>
+      <div class="cd-grid">
+        <div class="cd-item"><span class="cd-num" id="days">00</span><span class="cd-lbl">Days</span></div>
+        <div class="cd-item"><span class="cd-num" id="hours">00</span><span class="cd-lbl">Hours</span></div>
+        <div class="cd-item"><span class="cd-num" id="minutes">00</span><span class="cd-lbl">Min</span></div>
+        <div class="cd-item"><span class="cd-num" id="seconds">00</span><span class="cd-lbl">Sec</span></div>
+      </div>
+      <div class="cd-info">
+        <div class="cd-row"><span class="cd-icon">📍</span>Istanbul Fuar Merkezi (İFM)</div>
+        <div class="cd-row"><span class="cd-icon">📅</span>May 5–9, 2026 · 09:00 – 18:00</div>
+        <div class="cd-row"><span class="cd-icon">🤝</span>Private briefings by appointment</div>
+        <div class="cd-row"><span class="cd-icon">✉️</span><a href="/cdn-cgi/l/email-protection#9bf2f5fdf4dbfaf7fdfae8f2e8b5f8f4f6" style="color:inherit;text-decoration:none;"><span class="__cf_email__" data-cfemail="3c55525a537c5d505a5d4f554f125f5351">[email&#160;protected]</span></a></div>
+      </div>
+    </div>
   </div>
 </div>
 
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-block"><div class="stat-num">33+</div><div class="stat-lbl">Defense Systems</div></div>
+  <div class="stat-block"><div class="stat-num">360°</div><div class="stat-lbl">UAV Coverage</div></div>
+  <div class="stat-block"><div class="stat-num">1000km</div><div class="stat-lbl">Max Strike Range</div></div>
+  <div class="stat-block"><div class="stat-num">5</div><div class="stat-lbl">Fair Days</div></div>
+</div>
+
+<!-- PRODUCTS -->
+<div id="products">
+  <div class="section">
+    <div class="eyebrow">Product Portfolio</div>
+    <h2 class="sec-title">Systems on Display</h2>
+    <div class="filter-wrap">
+      <button class="ftab active" data-filter="all">All Systems</button>
+      <button class="ftab" data-filter="ew">Electronic Warfare</button>
+      <button class="ftab" data-filter="air">Airborne Systems</button>
+      <button class="ftab" data-filter="drone">Drone Systems</button>
+      <button class="ftab" data-filter="detect">Detection Systems</button>
+    </div>
+    <div class="pgrid" id="productGrid">
+    <div class="pcard" data-cat="ew">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Falfa-850v%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="ALFA Drone-UAV Jammer" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Electronic Warfare</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">ALFA Drone-UAV Jammer</div>
+        <div class="ptag">Fixed-Site 360° Counter-UAV</div>
+        <div class="pdesc">Continuous 24/7 RF suppression across all UAV control, GNSS, telemetry and video frequencies. Omnidirectional coverage from a single installation point.</div>
+        <div class="pspecs"><span class="spec-chip">24/7 Operation</span><span class="spec-chip">360° Coverage</span><span class="spec-chip">All Weather</span><span class="spec-chip">GNSS Suppression</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="ew">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Falfa-850v-mobile%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="ALFA 850V Mobile" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Electronic Warfare</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">ALFA 850V Mobile</div>
+        <div class="ptag">Vehicle-Mounted Counter-UAV</div>
+        <div class="pdesc">Roof-mounted mobile EW system delivering 360° RF suppression while stationary or in motion. Integrates into standard tactical vehicles without structural modification.</div>
+        <div class="pspecs"><span class="spec-chip">Mobile Operation</span><span class="spec-chip">360° Coverage</span><span class="spec-chip">9 dBi</span><span class="spec-chip">On-the-Move</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="ew">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Falfa-tank%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="ALFA TANK" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Electronic Warfare</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">ALFA TANK</div>
+        <div class="ptag">Armored Platform Counter-UAV</div>
+        <div class="pdesc">Purpose-built for direct integration on tank turrets and armored vehicle hulls. Operates on DC 24V vehicle power, no external supply needed.</div>
+        <div class="pspecs"><span class="spec-chip">Tank Integration</span><span class="spec-chip">DC 24V</span><span class="spec-chip">Ruggedized</span><span class="spec-chip">60×60×60 cm</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="ew">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Falfa-naval%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="ALFA NAVAL" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Electronic Warfare</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">ALFA NAVAL</div>
+        <div class="ptag">Maritime Counter-UAV</div>
+        <div class="pdesc">Marine-grade counter-UAV jamming for naval vessels and patrol boats. Weather-resistant enclosure withstanding salt air, high humidity and open-sea conditions.</div>
+        <div class="pspecs"><span class="spec-chip">Marine Grade</span><span class="spec-chip">220V AC / 24V DC</span><span class="spec-chip">Port Security</span><span class="spec-chip">Coastal Defense</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="ew">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fsecuradio%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="SECURADIO" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Electronic Warfare</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">SECURADIO</div>
+        <div class="ptag">RF Shielding System</div>
+        <div class="pdesc">Advanced radio frequency shielding system designed to suppress unauthorized AM/FM and HF radio communication in critical facilities with 1 Hz frequency precision.</div>
+        <div class="pspecs"><span class="spec-chip">1 Hz Precision</span><span class="spec-chip">Min Bandwidth</span><span class="spec-chip">Critical Facilities</span><span class="spec-chip">HF/AM/FM</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="ew">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fied-jammer%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="IED Jammer" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Electronic Warfare</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">IED Jammer</div>
+        <div class="ptag">Remote-Controlled Bomb Blocking</div>
+        <div class="pdesc">Receiver-blind technology neutralizes IED triggers across 315/433 MHz, LoRa, GSM, GNSS and all known detonation frequencies. Extended range at lower RF power.</div>
+        <div class="pspecs"><span class="spec-chip">Receiver-Blind</span><span class="spec-chip">Full Frequency</span><span class="spec-chip">GSM Coverage</span><span class="spec-chip">Low Power</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="ew">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fvega%2Fimages%2Fvega-hero.webp&w=600&h=400&fit=cover&output=webp" alt="VEGA Directional Jammer" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Electronic Warfare</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">VEGA Directional Jammer</div>
+        <div class="ptag">Long-Range Directional EW</div>
+        <div class="pdesc">High-power directional electronic warfare system built for long-range RF denial, perimeter security, and strategic counter-UAV operations.</div>
+        <div class="pspecs"><span class="spec-chip">Directional</span><span class="spec-chip">Long-Range</span><span class="spec-chip">High-Power</span><span class="spec-chip">Perimeter Security</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="air">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fbarracuda%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="ALFA UAS" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Airborne Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">ALFA UAS</div>
+        <div class="ptag">Airborne ISR & EW Platform</div>
+        <div class="pdesc">Mission-adaptive VTOL unmanned aerial system for ISR, airborne electronic warfare, and high-value tactical overwatch with up to 8-hour endurance.</div>
+        <div class="pspecs"><span class="spec-chip">8H Endurance</span><span class="spec-chip">VTOL</span><span class="spec-chip">Airborne EW</span><span class="spec-chip">ISR</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fatalay%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="ATALAY" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">ATALAY</div>
+        <div class="ptag">Urban Response Platform</div>
+        <div class="pdesc">Heavy-duty multi-mission drone for firefighting, structural inspection, and facade cleaning in high-rise urban environments. 50 kg payload capacity.</div>
+        <div class="pspecs"><span class="spec-chip">50 kg Payload</span><span class="spec-chip">Modular Payload</span><span class="spec-chip">Quick-Swap</span><span class="spec-chip">Urban Ops</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fyukbey%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="YÜKBEY" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">YÜKBEY</div>
+        <div class="ptag">Heavy Lift Logistics Platform</div>
+        <div class="pdesc">Heavy lift logistics drone with dual 25,000 mAh Li-ion battery packs and automatic failover. 30 kg payload, 30 km operational range.</div>
+        <div class="pspecs"><span class="spec-chip">30 kg Payload</span><span class="spec-chip">30 km Range</span><span class="spec-chip">Dual Battery</span><span class="spec-chip">Auto-Failover</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Falga%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="ALGA" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">ALGA</div>
+        <div class="ptag">Precision Strike & Reconnaissance</div>
+        <div class="pdesc">Tactical drone with precision targeting system and dual-locking ammunition release apparatus. Operates with high precision in reconnaissance and surveillance missions.</div>
+        <div class="pspecs"><span class="spec-chip">Dual-Lock Release</span><span class="spec-chip">Military FCS</span><span class="spec-chip">GPS Fix</span><span class="spec-chip">Waypoint Nav</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fsafir%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="SAFIR" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">SAFIR</div>
+        <div class="ptag">High-Speed FPV Platform</div>
+        <div class="pdesc">Advanced FPV drone for professional missions. 150–200+ km/h with immersive goggle control for day and night precision navigation in complex environments.</div>
+        <div class="pspecs"><span class="spec-chip">200+ km/h</span><span class="spec-chip">FPV Goggle Control</span><span class="spec-chip">Day/Night</span><span class="spec-chip">Long Range</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Ftalon%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="TALON" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">TALON</div>
+        <div class="ptag">Long-Range Reconnaissance UAV</div>
+        <div class="pdesc">Electric-powered fixed-wing mini UAV for tactical reconnaissance, surveillance, target acquisition, and border security. Hand-launched, no runway required.</div>
+        <div class="pspecs"><span class="spec-chip">Hand-Launch</span><span class="spec-chip">50–100 Min</span><span class="spec-chip">Low RCS</span><span class="spec-chip">Border Security</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fwhite-falcon-a1%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="WHITE FALCON A1" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">WHITE FALCON A1</div>
+        <div class="ptag">Precision Strike at 400+ km/h</div>
+        <div class="pdesc">Compact high-speed FPV attack drone with 50 Hz AI guidance module and target memory. 1 kg payload, 400+ km/h top speed for precision strike missions.</div>
+        <div class="pspecs"><span class="spec-chip">400+ km/h</span><span class="spec-chip">1 kg Payload</span><span class="spec-chip">AI Guidance 50Hz</span><span class="spec-chip">FPV</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fd-1000%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="D-1000" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">D-1000</div>
+        <div class="ptag">High-Speed Precision Strike</div>
+        <div class="pdesc">FPV kamikaze drone with 1–7 kg payload, 150–200+ km/h speed, and up to 20 km range for precision strike missions. Largest payload in the FPV kamikaze class.</div>
+        <div class="pspecs"><span class="spec-chip">7 kg Payload</span><span class="spec-chip">200+ km/h</span><span class="spec-chip">20 km Range</span><span class="spec-chip">FPV</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fd-1050%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="D-1050" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">D-1050</div>
+        <div class="ptag">Jam-Proof Fiber Optic Strike</div>
+        <div class="pdesc">FPV kamikaze drone with fiber optic cable link — unjammable, unspoofable, GPS-denied operation. 1–5 kg payload, 25 km range.</div>
+        <div class="pspecs"><span class="spec-chip">Fiber Optic</span><span class="spec-chip">GPS-Denied</span><span class="spec-chip">25 km Range</span><span class="spec-chip">Jam-Proof</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fm-1000%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="M-1000" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">M-1000</div>
+        <div class="ptag">Extended Endurance Surveillance</div>
+        <div class="pdesc">1-hour endurance observation multicopter with 30× optical zoom gimbal camera and 15 km range for persistent surveillance and reconnaissance.</div>
+        <div class="pspecs"><span class="spec-chip">1H Endurance</span><span class="spec-chip">30× Zoom</span><span class="spec-chip">15 km Range</span><span class="spec-chip">3-Axis Gimbal</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fp-5%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="P-5" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">P-5</div>
+        <div class="ptag">Tactical Payload Multicopter</div>
+        <div class="pdesc">5 kg payload multicopter with 45-minute endurance, 30× gimbal camera, precision drop mechanism, and optional thermal camera for tactical operations.</div>
+        <div class="pspecs"><span class="spec-chip">5 kg Payload</span><span class="spec-chip">45 Min</span><span class="spec-chip">30× Gimbal</span><span class="spec-chip">Thermal Option</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fp-10%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="P-10" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">P-10</div>
+        <div class="ptag">Heavy Tactical Payload Platform</div>
+        <div class="pdesc">10 kg payload multicopter with 40-minute endurance, 30× gimbal camera, and GPS-coordinated payload drop for heavy tactical and logistics missions.</div>
+        <div class="pspecs"><span class="spec-chip">10 kg Payload</span><span class="spec-chip">40 Min</span><span class="spec-chip">30× Gimbal</span><span class="spec-chip">Precision Drop</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fmp-50%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="MP-50" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">MP-50</div>
+        <div class="ptag">Maximum Capacity Heavy Lift</div>
+        <div class="pdesc">50 kg payload multicopter with 30-minute endurance and 10 km range. Industry-leading multicopter payload capacity for the most demanding heavy-lift missions.</div>
+        <div class="pspecs"><span class="spec-chip">50 kg Payload</span><span class="spec-chip">30 Min</span><span class="spec-chip">10 km Range</span><span class="spec-chip">Precision Drop</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fp-100%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="P-100" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">P-100</div>
+        <div class="ptag">Ultra Heavy Lift UAV</div>
+        <div class="pdesc">100 kg payload multicopter with 25-minute endurance and GPS-coordinated delivery at ranges up to 7 km. Maximum payload capacity for any tactical multicopter.</div>
+        <div class="pspecs"><span class="spec-chip">100 kg Payload</span><span class="spec-chip">25 Min</span><span class="spec-chip">7 km Range</span><span class="spec-chip">GPS Drop</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fk-100%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="K-100" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">K-100</div>
+        <div class="ptag">Long-Range Precision Strike</div>
+        <div class="pdesc">1.8 m wingspan fixed-wing kamikaze UAV with 2 kg payload, 2-hour loitering endurance, and 100 km operational range. 10× the range of comparable multicopters.</div>
+        <div class="pspecs"><span class="spec-chip">100 km Range</span><span class="spec-chip">2 kg Payload</span><span class="spec-chip">2H Endurance</span><span class="spec-chip">Loitering</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fk-400%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="K-400" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">K-400</div>
+        <div class="ptag">400 km Extended Strike</div>
+        <div class="pdesc">Fixed-wing kamikaze UAV with 5 kg payload, 4-hour loitering endurance, and 400 km operational range for strategic strike missions beyond tactical air defense.</div>
+        <div class="pspecs"><span class="spec-chip">400 km Range</span><span class="spec-chip">5 kg Payload</span><span class="spec-chip">4H Endurance</span><span class="spec-chip">Loitering</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fk-750%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="K-750" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">K-750</div>
+        <div class="ptag">750 km Operational Strike</div>
+        <div class="pdesc">Fixed-wing kamikaze with 15 kg payload, 7-hour endurance, and 750 km range for operational-level precision strike. Reaches targets beyond most tactical air defense.</div>
+        <div class="pspecs"><span class="spec-chip">750 km Range</span><span class="spec-chip">15 kg Payload</span><span class="spec-chip">7H Endurance</span><span class="spec-chip">Heavy Warhead</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fkm-1000%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="KM-1000" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">KM-1000</div>
+        <div class="ptag">1,000 km Strategic Strike</div>
+        <div class="pdesc">Stealth-configured fixed-wing kamikaze with 15 kg payload, 9-hour endurance, 1,000 km strategic range, and low radar cross-section airframe geometry.</div>
+        <div class="pspecs"><span class="spec-chip">1000 km Range</span><span class="spec-chip">15 kg Payload</span><span class="spec-chip">9H Endurance</span><span class="spec-chip">Stealth</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="drone">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fv-2346%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="V-2346" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Drone Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">V-2346</div>
+        <div class="ptag">Multi-Wingspan VTOL Platform</div>
+        <div class="pdesc">Fixed-wing VTOL UAV series in 2m, 3.2m, 4m, and 6m wingspan variants with 2–8 hour endurance and optional Anti-GNSS card for electronic warfare environments.</div>
+        <div class="pspecs"><span class="spec-chip">4 Wingspan Options</span><span class="spec-chip">2–8H Endurance</span><span class="spec-chip">VTOL</span><span class="spec-chip">Anti-GNSS</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="detect">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fdrone-jammer%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="DRONE JAMMER" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Detection Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">DRONE JAMMER</div>
+        <div class="ptag">Wide-Band UAV Neutralization</div>
+        <div class="pdesc">Counter-UAV jamming system neutralizing drones by disrupting GPS, RF control signals, and video transmission across wide frequency bands simultaneously.</div>
+        <div class="pspecs"><span class="spec-chip">GPS Cutting</span><span class="spec-chip">2.4 / 5.8 GHz</span><span class="spec-chip">Wide-Band</span><span class="spec-chip">Failsafe Trigger</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="detect">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fuav-detection-radar%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="UAV Detection Radar" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Detection Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">UAV Detection Radar</div>
+        <div class="ptag">Advanced Wide-Area Radar</div>
+        <div class="pdesc">Advanced radar system detecting small UAVs at extended ranges with 360° scanning, automatic tracking, and early warning. Detects micro and nano-class UAVs.</div>
+        <div class="pspecs"><span class="spec-chip">360° Scan</span><span class="spec-chip">Micro-UAV</span><span class="spec-chip">Auto-Track</span><span class="spec-chip">Early Warning</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="detect">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Frf-uav-detection%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="RF UAV Detection" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Detection Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">RF UAV Detection</div>
+        <div class="ptag">Passive Silent Detection</div>
+        <div class="pdesc">Passive RF-based UAV detection system identifying drones by analyzing their own radio frequency emissions. Completely covert — zero emission signature.</div>
+        <div class="pspecs"><span class="spec-chip">Passive RF</span><span class="spec-chip">Zero Emission</span><span class="spec-chip">Real-Time</span><span class="spec-chip">Covert Ops</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="detect">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Foptical-uav-detection%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="Optical UAV Detection" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Detection Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">Optical UAV Detection</div>
+        <div class="ptag">AI Day & Night Vision</div>
+        <div class="pdesc">High-resolution camera-based UAV detection using AI for automatic identification, tracking and classification in day and night conditions. Low false alarm rate.</div>
+        <div class="pspecs"><span class="spec-chip">AI-Based</span><span class="spec-chip">Night Vision</span><span class="spec-chip">24/7</span><span class="spec-chip">Low False Alarm</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+    <div class="pcard" data-cat="detect">
+      <div class="pimg-wrap">
+        <img class="pimg" src="https://wsrv.nl/?url=https%3A%2F%2Fwww.rdnsoft.com%2Fproducts%2Fdr100-ab-8%2Fimages%2Fhero.webp&w=600&h=400&fit=cover&output=webp" alt="DR100-AB-8" onerror="this.parentElement.style.background='#eef0f4'">
+        <div class="pcat-pill">Detection Systems</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">DR100-AB-8</div>
+        <div class="ptag">360° Mobile at 150 km/h</div>
+        <div class="pdesc">Vehicle-mounted integrated drone detection and countermeasure system. 5 km detection range, 3 km jamming coverage, full-frequency protection at 150 km/h.</div>
+        <div class="pspecs"><span class="spec-chip">5km Detection</span><span class="spec-chip">3km Jamming</span><span class="spec-chip">150 km/h</span><span class="spec-chip">360° Coverage</span></div>
+        <a class="plink" href="#meeting">Request Briefing →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MEETING -->
+<div class="meeting-bg" id="meeting">
+  <div class="section">
+    <div class="eyebrow">Schedule Your Visit</div>
+    <h2 class="sec-title">Request a Meeting</h2>
+    <div class="meeting-grid">
+      <div class="mside">
+        <p>Meet our engineers and product specialists on-site at SAHA EXPO 2026. Meeting slots are limited — submit your request and we'll confirm within 24 hours.</p>
+        <div class="info-list">
+          <div class="info-item"><div class="ii-icon">📍</div><div><div class="ii-label">Location</div><div class="ii-val">Istanbul Fuar Merkezi (İFM)</div></div></div>
+          <div class="info-item"><div class="ii-icon">📅</div><div><div class="ii-label">Fair Dates</div><div class="ii-val">May 5–9, 2026 · Daily 09:00 – 18:00</div></div></div>
+          <div class="info-item"><div class="ii-icon">⏱</div><div><div class="ii-label">Session Duration</div><div class="ii-val">30-minute briefing slots</div></div></div>
+          <div class="info-item"><div class="ii-icon">👥</div><div><div class="ii-label">Who You'll Meet</div><div class="ii-val">Product Engineers · Business Development</div></div></div>
+          <div class="info-item"><div class="ii-icon">✉️</div><div><div class="ii-label">Contact</div><div class="ii-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="731a1d151c33121f1512001a005d101c1e">[email&#160;protected]</a> · +90 536 446 11 35</div></div></div>
+        </div>
+      </div>
+      <div class="">
+        <div class="fcard">
+          <div class="fcard-tag">Meeting Request</div>
+          <form id="meetingForm">
+            <div class="frow"><div class="fg"><label class="fl">First Name *</label><input class="fi" id="fn" placeholder="John" required></div><div class="fg"><label class="fl">Last Name *</label><input class="fi" id="ln" placeholder="Smith" required></div></div>
+            <div class="fg"><label class="fl">Organization *</label><input class="fi" id="org" placeholder="Ministry / Company" required></div>
+            <div class="frow"><div class="fg"><label class="fl">Country *</label><input class="fi" id="country" placeholder="Country" required></div><div class="fg"><label class="fl">Work Email *</label><input class="fi" type="email" id="email" placeholder="you@org.com" required></div></div>
+            <div class="frow">
+              <div class="fg"><label class="fl">Preferred Day *</label><select class="fsel" id="day" required><option value="">Select Day</option><option>May 5 — Monday</option><option>May 6 — Tuesday</option><option>May 7 — Wednesday</option><option>May 8 — Thursday</option><option>May 9 — Friday</option></select></div>
+              <div class="fg"><label class="fl">Time Slot *</label><select class="fsel" id="slot" required><option value="">Select Time</option><option>09:00 – 09:30</option><option>09:30 – 10:00</option><option>10:00 – 10:30</option><option>10:30 – 11:00</option><option>11:00 – 11:30</option><option>11:30 – 12:00</option><option>13:00 – 13:30</option><option>13:30 – 14:00</option><option>14:00 – 14:30</option><option>14:30 – 15:00</option><option>15:00 – 15:30</option><option>15:30 – 16:00</option><option>16:00 – 16:30</option><option>16:30 – 17:00</option></select></div>
+            </div>
+            <div class="fg"><label class="fl">Products of Interest</label><select class="fsel" id="interest"><option value="">Select Category</option><option>Counter-UAV Jammers</option><option>Tactical Drone Systems</option><option>Kamikaze / Strike UAVs</option><option>UAV Detection Systems</option><option>IED / EW Systems</option><option>Naval / Maritime Systems</option><option>Full Portfolio Briefing</option></select></div>
+            <div class="fg"><label class="fl">Additional Notes</label><textarea class="fta" id="notes" placeholder="Specific requirements or topics to discuss..."></textarea></div>
+            <button type="submit" class="fsub" id="submitBtn">Submit Meeting Request →</button>
+          </form>
+          <div class="success-msg" id="successMsg">
+            <div class="s-icon">✅</div>
+            <h3>Request Received</h3>
+            <div style="color:var(--muted);font-size:14px;margin-bottom:4px">Your queue reference:</div>
+            <div class="s-ref" id="queueRef"></div>
+            <p>Our team will confirm your slot within 24 hours via email.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUEUE -->
+<div class="queue-bg" id="queue-section">
+  <div class="section">
+    <div class="qheader">
+      <div>
+        <div class="eyebrow">Live Schedule</div>
+        <h2 class="sec-title" style="margin-bottom:8px">Meeting Queue</h2>
+        <div class="qbadge"><div class="live-dot"></div><span id="queueCount">0 requests</span></div>
+      </div>
+      <div>
+        <div class="admin-row">
+          <input type="password" class="admin-inp" id="adminPwd" placeholder="Admin PIN">
+          <button class="abtn" id="adminLogin">Access</button>
+        </div>
+      </div>
+    </div>
+    <div id="queueWrap"><div class="qempty">No meetings scheduled yet</div></div>
+    <div class="apanel" id="adminPanel">
+      <span class="apanel-lbl">Admin</span>
+      <button class="abtn" id="exportCSV">↓ Export CSV</button>
+      <button class="abtn" id="confirmAll">✓ Confirm All Pending</button>
+      <button class="abtn danger" id="clearQueue">✕ Clear All</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">ALFA<span>SIS</span></div>
+  <div class="fmid">SAHA EXPO 2026 · Istanbul Fuar Merkezi (İFM)<br>May 5–9, 2026</div>
+  <div class="fright"><a href="/cdn-cgi/l/email-protection#8ae3e4ece5caebe6ecebf9e3f9a4e9e5e7"><span class="__cf_email__" data-cfemail="5e373038311e3f32383f2d372d703d3133">[email&#160;protected]</span></a><br>+90 536 446 11 35</div>
+</footer>
+
 <div class="toast" id="toast"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function() {
 
-// ===== TOAST =====
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.innerText = msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
-}
+  // ── FILTER TABS ──────────────────────────────────────────────
+  document.querySelectorAll('.ftab').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.ftab').forEach(function(t) { t.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      document.querySelectorAll('.pcard').forEach(function(card) {
+        card.classList.toggle('phidden', f !== 'all' && card.getAttribute('data-cat') !== f);
+      });
+    });
+  });
 
-// ===== LOCAL STORAGE QUEUE =====
-function getQueue(){
-  return JSON.parse(localStorage.getItem('queue') || '[]');
-}
+  // ── COUNTDOWN ────────────────────────────────────────────────
+  function pad(n) { return String(Math.max(0, n)).padStart(2, '0'); }
+  function tick() {
+    var diff = new Date(2026, 4, 5, 9, 0, 0) - new Date();
+    document.getElementById('days').textContent    = pad(Math.floor(diff / 86400000));
+    document.getElementById('hours').textContent   = pad(Math.floor(diff % 86400000 / 3600000));
+    document.getElementById('minutes').textContent = pad(Math.floor(diff % 3600000 / 60000));
+    document.getElementById('seconds').textContent = pad(Math.floor(diff % 60000 / 1000));
+    if (diff <= 0) { ['days','hours','minutes','seconds'].forEach(function(id){ document.getElementById(id).textContent='00'; }); }
+  }
+  tick();
+  setInterval(tick, 1000);
 
-function saveQueue(q){
-  localStorage.setItem('queue', JSON.stringify(q));
-}
-
-// ===== RENDER =====
-function renderQueue(){
-  console.log("Queue:", getQueue());
-}
-
-// ===== EXPORT CSV =====
-function exportCSV(){
-  const data = getQueue();
-  if(!data.length){
-    showToast("No data");
-    return;
+  // ── TOAST ────────────────────────────────────────────────────
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 3000);
   }
 
-  let csv = "Name,Email\n";
-  data.forEach(r=>{
-    csv += `${r.name},${r.email}\n`;
+  // ── QUEUE ────────────────────────────────────────────────────
+  var queue = [];
+  var isAdmin = false;
+  try { queue = JSON.parse(localStorage.getItem('alf_q') || '[]'); } catch(e) {}
+  function saveQ() { try { localStorage.setItem('alf_q', JSON.stringify(queue)); } catch(e) {} }
+
+  function pad2(n) { return String(n).padStart(2,'0'); }
+
+  function renderQueue() {
+    document.getElementById('queueCount').textContent = queue.length + ' request' + (queue.length !== 1 ? 's' : '');
+    var w = document.getElementById('queueWrap');
+    if (!queue.length) { w.innerHTML = '<div class="qempty">No meetings scheduled yet</div>'; return; }
+    var rows = queue.map(function(q, i) {
+      var acts = isAdmin
+        ? '<td><button class="abtn status-btn" data-idx="'+i+'" data-st="confirmed" style="margin-right:4px;padding:5px 10px">&#10003;</button><button class="abtn danger status-btn" data-idx="'+i+'" data-st="cancelled" style="padding:5px 10px">&#10005;</button></td>'
+        : '';
+      return '<tr>'
+        + '<td class="qnum">'+pad2(i+1)+'</td>'
+        + '<td><div class="qname">'+q.fn+' '+q.ln+'</div><div style="font-family:var(--font-mono);font-size:11px;color:var(--muted-light)">'+q.ref+'</div></td>'
+        + '<td class="wrap"><div class="qname">'+q.org+'</div><div class="qorg">'+q.country+'</div></td>'
+        + '<td><div style="font-weight:600">'+q.day+'</div><div class="qorg">'+q.slot+'</div></td>'
+        + '<td class="qorg wrap">'+(q.interest||'&mdash;')+'</td>'
+        + '<td><span class="spill '+q.status+'">'+q.status+'</span></td>'
+        + acts + '</tr>';
+    }).join('');
+    var th = isAdmin ? '<th>Actions</th>' : '';
+    w.innerHTML = '<div class="qtable-wrap"><table class="qtable"><thead><tr><th>#</th><th>Name</th><th>Organization</th><th>Appointment</th><th>Interest</th><th>Status</th>'+th+'</tr></thead><tbody>'+rows+'</tbody></table></div>';
+    if (isAdmin) {
+      w.querySelectorAll('.status-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var idx = parseInt(btn.getAttribute('data-idx'));
+          queue[idx].status = btn.getAttribute('data-st');
+          saveQ(); renderQueue();
+          toast(queue[idx].ref + ' → ' + queue[idx].status);
+        });
+      });
+    }
+  }
+  renderQueue();
+
+  // Admin
+  document.getElementById('adminLogin').addEventListener('click', function() {
+    if (document.getElementById('adminPwd').value === '2025') {
+      isAdmin = true;
+      document.getElementById('adminPanel').classList.add('visible');
+      renderQueue();
+      toast('Admin mode active');
+    } else { toast('Invalid PIN'); }
+  });
+  document.getElementById('confirmAll').addEventListener('click', function() {
+    queue = queue.map(function(q) { return Object.assign({}, q, {status: q.status==='pending'?'confirmed':q.status}); });
+    saveQ(); renderQueue(); toast('All pending confirmed');
+  });
+  document.getElementById('clearQueue').addEventListener('click', function() {
+    if (confirm('Clear all meetings?')) { queue=[]; saveQ(); renderQueue(); toast('Queue cleared'); }
+  });
+  document.getElementById('exportCSV').addEventListener('click', function() {
+    var h = ['Ref','First','Last','Org','Country','Email','Day','Slot','Interest','Status','Notes','Timestamp'];
+    var rows = queue.map(function(q){ return [q.ref,q.fn,q.ln,q.org,q.country,q.email,q.day,q.slot,q.interest,q.status,q.notes,q.ts]; });
+    var csv = [h].concat(rows).map(function(r){ return r.map(function(v){ return '"'+(v||'').toString().replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+    a.download = 'alfasis-meetings-'+new Date().toISOString().slice(0,10)+'.csv';
+    a.click();
   });
 
-  const blob = new Blob([csv], {type:'text/csv'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = "meetings.csv";
-  a.click();
-}
+  // ── FORM ─────────────────────────────────────────────────────
+  function genRef() { return 'ALF-'+Math.random().toString(36).slice(2,7).toUpperCase(); }
+  var FSID = 'YOUR_FORM_ID'; // formspree.io'dan al
 
-// ===== FORM =====
-document.getElementById('meetingForm').addEventListener('submit', function(e){
-  e.preventDefault();
-
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-
-  const queue = getQueue();
-  queue.push({
-    name,
-    email,
-    date: new Date().toISOString()
+  document.getElementById('meetingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true; btn.textContent = 'Sending…';
+    var ref = genRef();
+    var fn = document.getElementById('fn').value;
+    var ln = document.getElementById('ln').value;
+    var org = document.getElementById('org').value;
+    var payload = {
+      _subject: '[SAHA EXPO 2026] Meeting Request — '+fn+' '+ln+' / '+org,
+      _replyto: document.getElementById('email').value,
+      reference: ref, first_name: fn, last_name: ln, organization: org,
+      country: document.getElementById('country').value,
+      email: document.getElementById('email').value,
+      day: document.getElementById('day').value,
+      slot: document.getElementById('slot').value,
+      interest: document.getElementById('interest').value,
+      notes: document.getElementById('notes').value,
+      timestamp: new Date().toISOString()
+    };
+    fetch('https://formspree.io/f/'+FSID, {
+      method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body:JSON.stringify(payload)
+    }).then(function(r){ if(!r.ok) throw new Error();
+      queue.push({ref:ref,fn:fn,ln:ln,org:org,country:payload.country,email:payload.email,day:payload.day,slot:payload.slot,interest:payload.interest,notes:payload.notes,status:'pending',ts:payload.timestamp});
+      saveQ(); renderQueue();
+      document.getElementById('queueRef').textContent = ref;
+      document.getElementById('successMsg').style.display = 'block';
+      document.getElementById('meetingForm').style.display = 'none';
+      toast('Meeting request '+ref+' sent ✓');
+      setTimeout(function(){ document.getElementById('queue-section').scrollIntoView({behavior:'smooth'}); }, 600);
+    }).catch(function(){
+      btn.disabled=false; btn.textContent='Submit Meeting Request →';
+      toast('Sending failed — please email us directly');
+    });
   });
 
-  saveQueue(queue);
-
-  document.getElementById('meetingForm').style.display = "none";
-  document.getElementById('success').style.display = "block";
-
-  showToast("Saved locally ✔");
-});
-
-// INIT
-renderQueue();
-
+})();
 </script>
-
 </body>
 </html>
