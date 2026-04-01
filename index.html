@@ -182,8 +182,7 @@
   .toast.show { transform:none; opacity:1; }
 
   @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
-  .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; }
-  .reveal.visible { opacity:1; transform:none; }
+
 
   ::-webkit-scrollbar { width:6px; height:6px; }
   ::-webkit-scrollbar-track { background:var(--bg); }
@@ -241,7 +240,7 @@
 </div>
 
 <!-- STATS -->
-<div class="stats-strip reveal">
+<div class="stats-strip">
   <div class="stat-block"><div class="stat-num">33+</div><div class="stat-lbl">Defense Systems</div></div>
   <div class="stat-block"><div class="stat-num">360°</div><div class="stat-lbl">UAV Coverage</div></div>
   <div class="stat-block"><div class="stat-num">1000km</div><div class="stat-lbl">Max Strike Range</div></div>
@@ -502,9 +501,9 @@
 <div class="meeting-bg" id="meeting">
   <div class="section">
     <div class="eyebrow">Schedule Your Visit</div>
-    <h2 class="sec-title reveal">Request a Meeting</h2>
+    <h2 class="sec-title">Request a Meeting</h2>
     <div class="meeting-grid">
-      <div class="mside reveal">
+      <div class="mside">
         <p>Meet our engineers and product specialists on-site at SAHA EXPO 2026. Meeting slots are limited — submit your request and we'll confirm within 24 hours.</p>
         <div class="info-list">
           <div class="info-item"><div class="ii-icon">📍</div><div><div class="ii-label">Location</div><div class="ii-val">Istanbul Fuar Merkezi (İFM)</div></div></div>
@@ -514,7 +513,7 @@
           <div class="info-item"><div class="ii-icon">✉️</div><div><div class="ii-label">Contact</div><div class="ii-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="731a1d151c33121f1512001a005d101c1e">[email&#160;protected]</a> · +90 536 446 11 35</div></div></div>
         </div>
       </div>
-      <div class="reveal">
+      <div class="">
         <div class="fcard">
           <div class="fcard-tag">Meeting Request</div>
           <form id="meetingForm">
@@ -578,50 +577,6 @@
 <div class="toast" id="toast"></div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const BASE = 'https://www.rdnsoft.com/products';
-const products = [
-  {cat:'ew',   slug:'alfa-850v',               imgFile:'hero.webp',     name:'ALFA Drone-UAV Jammer',  tagline:'Fixed-Site 360° Counter-UAV',    desc:'Continuous 24/7 RF suppression across all UAV control, GNSS, telemetry and video frequencies. Omnidirectional coverage from a single installation point.',  specs:['24/7 Operation','360° Coverage','All Weather','GNSS Suppression']},
-  {cat:'ew',   slug:'alfa-850v-mobile',         imgFile:'hero.webp',     name:'ALFA 850V Mobile',       tagline:'Vehicle-Mounted Counter-UAV',     desc:'Roof-mounted mobile EW system delivering 360° RF suppression while stationary or in motion. Integrates into standard tactical vehicles.',                specs:['Mobile','360° Coverage','9 dBi','On-the-Move']},
-  {cat:'ew',   slug:'alfa-tank',                imgFile:'hero.webp',     name:'ALFA TANK',              tagline:'Armored Platform Counter-UAV',    desc:'Purpose-built for direct integration on tank turrets and armored vehicle hulls. Operates on DC 24V vehicle power, no external supply needed.',            specs:['Tank Integration','DC 24V','Ruggedized','Compact']},
-  {cat:'ew',   slug:'alfa-naval',               imgFile:'hero.webp',     name:'ALFA NAVAL',             tagline:'Maritime Counter-UAV',            desc:'Marine-grade counter-UAV jamming for naval vessels, patrol boats and sea platforms. Salt-air and high-humidity resistant enclosure.',                      specs:['Marine Grade','220V AC/24V DC','Port Security','Coastal Defense']},
-  {cat:'ew',   slug:'vega',                     imgFile:'vega-hero.webp',name:'VEGA Directional Jammer',tagline:'Long-Range Directional EW',       desc:'High-power directional electronic warfare system for long-range RF denial, perimeter security, and strategic counter-UAV operations.',                   specs:['Directional','Long-Range','High-Power','Perimeter']},
-  {cat:'ew',   slug:'ied-jammer',               imgFile:'hero.webp',     name:'IED Jammer',             tagline:'Remote-Controlled Bomb Blocking', desc:'Receiver-blind technology neutralizes IED triggers across 315/433 MHz, LoRa, GSM, GNSS and all known detonation frequencies.',                          specs:['Receiver-Blind','Full Frequency','GSM Coverage','Low Power']},
-  {cat:'detect',slug:'uav-detection-radar',     imgFile:'hero.webp',     name:'UAV Detection Radar',    tagline:'Wide-Area Radar Detection',       desc:'Advanced radar detecting small UAVs at extended ranges with 360° scanning, automatic tracking, and early warning capability.',                            specs:['360° Scan','Micro-UAV','Auto-Track','Early Warning']},
-  {cat:'detect',slug:'rf-uav-detection',        imgFile:'hero.webp',     name:'RF UAV Detection',       tagline:'Passive Silent Detection',        desc:'Identifies drones by analyzing their own RF emissions — completely covert, zero emission signature, real-time alerting.',                                   specs:['Passive RF','Zero Emission','Real-Time','Covert']},
-  {cat:'detect',slug:'optical-uav-detection',   imgFile:'hero.webp',     name:'Optical UAV Detection',  tagline:'AI Day & Night Vision',           desc:'Camera-based UAV detection using machine learning for automatic identification and tracking in day and night conditions.',                                  specs:['AI-Based','Night Vision','24/7','Low False Alarm']},
-  {cat:'detect',slug:'dr100-ab-8',              imgFile:'hero.webp',     name:'DR100-AB-8',             tagline:'360° Mobile at 150 km/h',         desc:'Vehicle-mounted integrated detection and jamming. 5 km detection range, 3 km jamming, full-frequency coverage at convoy speed.',                          specs:['5km Detection','3km Jamming','150 km/h','Autonomous']},
-  {cat:'drone', slug:'barracuda',               imgFile:'hero.webp',     name:'ALFA UAS',               tagline:'Airborne ISR & EW Platform',      desc:'Mission-adaptive VTOL UAS for ISR, airborne electronic warfare, and high-value tactical overwatch. Up to 8-hour endurance.',                             specs:['8H Endurance','VTOL','Airborne EW','ISR']},
-  {cat:'drone', slug:'white-falcon-a1',         imgFile:'hero.webp',     name:'WHITE FALCON A1',        tagline:'Precision Strike at 400+ km/h',   desc:'Compact high-speed FPV attack drone with 50 Hz AI guidance, 1 kg payload, and 400+ km/h top speed for precision strike missions.',                      specs:['400+ km/h','1 kg Payload','AI Guidance','FPV']},
-  {cat:'drone', slug:'d-1050',                  imgFile:'hero.webp',     name:'D-1050',                 tagline:'Jam-Proof Fiber Optic Strike',    desc:'FPV kamikaze drone with fiber optic cable link — completely unjammable and GPS-denied operation. 1–5 kg payload, 25 km range.',                          specs:['Fiber Optic','GPS-Denied','25 km Range','Jam-Proof']},
-  {cat:'drone', slug:'km-1000',                 imgFile:'hero.webp',     name:'KM-1000',                tagline:'1,000 km Strategic Strike',       desc:'Stealth-configured fixed-wing kamikaze with 15 kg payload, 9-hour endurance, and 1,000 km strategic strike range.',                                      specs:['1000 km','15 kg Payload','9H Endurance','Stealth']},
-  {cat:'drone', slug:'talon',                   imgFile:'hero.webp',     name:'TALON',                  tagline:'Hand-Launch Reconnaissance UAV',  desc:'Electric-powered fixed-wing mini UAV for tactical recon and border security. No runway required. Low radar cross-section.',                              specs:['Hand-Launch','50–100 Min','Low RCS','Portable']},
-  {cat:'drone', slug:'yukbey',                  imgFile:'hero.webp',     name:'YÜKBEY',                 tagline:'30 kg Heavy Lift Cargo Drone',    desc:'Heavy lift logistics drone with dual battery failover system for safe, uninterrupted aerial logistics over up to 30 km.',                               specs:['30 kg Payload','30 km Range','Dual Battery','Auto-Failover']},
-  {cat:'drone', slug:'safir',                   imgFile:'hero.webp',     name:'SAFIR',                  tagline:'High-Speed FPV Platform',         desc:'Advanced FPV drone designed for professional missions. 150–200+ km/h with immersive goggle control for day and night operations.',                        specs:['200+ km/h','FPV Control','Day/Night','Long Range']},
-  {cat:'drone', slug:'k-400',                   imgFile:'hero.webp',     name:'K-400',                  tagline:'400 km Extended Strike',          desc:'Fixed-wing kamikaze UAV with 5 kg payload, 4-hour loitering endurance, and 400 km operational range for strategic strike.',                             specs:['400 km','5 kg Payload','4H Endurance','Loitering']},
-];
-
-const catLabels = {ew:'Electronic Warfare', drone:'Drone System', detect:'Detection'};
-
-function renderProducts() {
-  const grid = document.getElementById('productGrid');
-  grid.innerHTML = products.map((p,i) => {
-    const src = `https://wsrv.nl/?url=${encodeURIComponent(BASE+'/'+p.slug+'/images/'+p.imgFile)}&w=600&h=400&fit=cover&output=webp`;
-    return `<div class="pcard" data-cat="${p.cat}">
-      <div class="pimg-wrap">
-        <img class="pimg" src="${src}" alt="${p.name}" loading="eager" onerror="this.style.display='none'">
-        <div class="pcat-pill">${catLabels[p.cat]}</div>
-      </div>
-      <div class="pbody">
-        <div class="pname">${p.name}</div>
-        <div class="ptag">${p.tagline}</div>
-        <div class="pdesc">${p.desc}</div>
-        <div class="pspecs">${p.specs.map(s=>`<span class="spec-chip">${s}</span>`).join('')}</div>
-        <a class="plink" href="#meeting" onclick="prefill('${p.cat}')">Request Briefing →</a>
-      </div>
-    </div>`;
-  }).join('');
-  observeReveals();
-}
 
 window.filterCat = function(cat, btn) {
   document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
