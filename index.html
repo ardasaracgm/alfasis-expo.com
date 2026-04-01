@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALFASIS · IDEF 2025 Istanbul · May 5–9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --white: #ffffff;
+    --surface: #eef0f4;
+    --border: #dde0e8;
+    --border-dark: #c2c8d5;
+    --blue: #1b4fff;
+    --blue-dark: #0f34cc;
+    --blue-light: #e8eeff;
+    --blue-mid: #3d64ff;
+    --navy: #0a1640;
+    --text: #0d1526;
+    --muted: #5a6478;
+    --muted-light: #9aa3b8;
+    --red: #e02020;
+    --font-display: 'DM Serif Display', serif;
+    --font-ui: 'DM Sans', sans-serif;
+    --font-mono: 'Space Grotesk', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-ui); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 68px; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: var(--font-mono); font-weight: 700; font-size: 20px; letter-spacing: 3px; color: var(--navy); text-transform: uppercase; }
+  .nav-logo span { color: var(--blue); }
+  .nav-center { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; }
+  .live-dot { width: 7px; height: 7px; background: var(--blue); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+  .nav-cta { background: var(--blue); color: #fff; font-family: var(--font-mono); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; padding: 10px 24px; border: none; cursor: pointer; text-decoration: none; border-radius: 2px; transition: background .2s; }
+  .nav-cta:hover { background: var(--blue-dark); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 100px 52px 60px; gap: 60px; background: var(--white); position: relative; overflow: hidden; }
+  .hero::after { content:''; position:absolute; top:-200px; right:-200px; width:700px; height:700px; background:radial-gradient(circle,rgba(27,79,255,.07) 0%,transparent 70%); pointer-events:none; }
+  .hero-eyebrow { display:inline-flex; align-items:center; gap:8px; background:var(--blue-light); color:var(--blue); font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; border-radius:2px; margin-bottom:28px; opacity:0; animation:fadeUp .7s .1s forwards; }
+  .hero-eyebrow::before { content:''; width:6px; height:6px; background:var(--blue); border-radius:50%; animation:pulse 1.5s infinite; }
+  .hero-title { font-family:var(--font-display); font-size:clamp(44px,5.5vw,84px); line-height:1.05; color:var(--navy); margin-bottom:24px; opacity:0; animation:fadeUp .7s .25s forwards; }
+  .hero-title em { font-style:italic; color:var(--blue); }
+  .hero-desc { font-size:17px; color:var(--muted); line-height:1.7; margin-bottom:40px; max-width:480px; opacity:0; animation:fadeUp .7s .4s forwards; }
+  .hero-actions { display:flex; gap:12px; flex-wrap:wrap; opacity:0; animation:fadeUp .7s .55s forwards; }
+  .btn-primary { background:var(--blue); color:#fff; font-family:var(--font-mono); font-weight:700; font-size:14px; letter-spacing:1px; text-transform:uppercase; padding:16px 36px; border:none; cursor:pointer; text-decoration:none; border-radius:2px; transition:background .2s,transform .15s; display:inline-block; }
+  .btn-primary:hover { background:var(--blue-dark); transform:translateY(-1px); }
+  .btn-outline { border:1.5px solid var(--border-dark); color:var(--text); font-family:var(--font-mono); font-weight:500; font-size:14px; letter-spacing:1px; text-transform:uppercase; padding:16px 36px; cursor:pointer; text-decoration:none; border-radius:2px; transition:border-color .2s,color .2s; display:inline-block; background:transparent; }
+  .btn-outline:hover { border-color:var(--blue); color:var(--blue); }
+
+  /* COUNTDOWN CARD */
+  .hero-right { opacity:0; animation:fadeUp .7s .5s forwards; }
+  .countdown-card { background:var(--navy); color:#fff; padding:48px 40px; border-radius:4px; position:relative; overflow:hidden; }
+  .countdown-card::before { content:''; position:absolute; top:-80px; right:-80px; width:250px; height:250px; background:radial-gradient(circle,rgba(27,79,255,.35) 0%,transparent 70%); }
+  .cd-top { font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:32px; position:relative; }
+  .cd-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; margin-bottom:36px; }
+  .cd-item { position:relative; text-align:center; }
+  .cd-item:not(:last-child)::after { content:':'; position:absolute; right:-4px; top:50%; transform:translateY(-60%); font-family:var(--font-mono); font-size:32px; color:rgba(255,255,255,.2); }
+  .cd-num { font-family:var(--font-mono); font-weight:700; font-size:clamp(36px,4vw,52px); color:#fff; display:block; line-height:1; margin-bottom:6px; }
+  .cd-lbl { font-family:var(--font-mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.4); }
+  .cd-info { border-top:1px solid rgba(255,255,255,.1); padding-top:24px; display:flex; flex-direction:column; gap:10px; }
+  .cd-row { display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,.7); }
+  .cd-icon { font-size:15px; flex-shrink:0; }
+
+  /* STATS */
+  .stats-strip { display:grid; grid-template-columns:repeat(4,1fr); background:var(--blue); }
+  .stat-block { padding:36px 32px; border-right:1px solid rgba(255,255,255,.15); text-align:center; }
+  .stat-block:last-child { border-right:none; }
+  .stat-num { font-family:var(--font-mono); font-weight:700; font-size:44px; color:#fff; line-height:1; margin-bottom:6px; }
+  .stat-lbl { font-family:var(--font-ui); font-size:13px; color:rgba(255,255,255,.65); }
+
+  /* SECTION */
+  .section { padding:96px 52px; max-width:1300px; margin:0 auto; }
+  .eyebrow { font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--blue); margin-bottom:12px; }
+  .sec-title { font-family:var(--font-display); font-size:clamp(36px,4vw,60px); color:var(--navy); line-height:1.1; margin-bottom:48px; }
+
+  /* FILTER */
+  .filter-wrap { display:flex; gap:4px; margin-bottom:36px; background:var(--surface); padding:4px; border-radius:4px; width:fit-content; flex-wrap:wrap; }
+  .ftab { font-family:var(--font-mono); font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; padding:10px 22px; border:none; background:transparent; color:var(--muted); cursor:pointer; border-radius:2px; transition:all .2s; white-space:nowrap; }
+  .ftab.active { background:var(--white); color:var(--blue); box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .ftab:hover:not(.active) { color:var(--text); }
+
+  /* PRODUCT GRID */
+  .pgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
+  .pcard { background:var(--white); border:1px solid var(--border); border-radius:4px; overflow:hidden; transition:box-shadow .25s,transform .2s,border-color .2s; }
+  .pcard:hover { box-shadow:0 8px 32px rgba(27,79,255,.12); transform:translateY(-3px); border-color:rgba(27,79,255,.3); }
+  .pimg-wrap { overflow:hidden; position:relative; background:var(--surface); height:200px; }
+  .pimg { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
+  .pcard:hover .pimg { transform:scale(1.05); }
+  .pcat-pill { position:absolute; top:12px; left:12px; background:var(--blue); color:#fff; font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:4px 10px; border-radius:2px; }
+  .pbody { padding:22px; }
+  .pname { font-family:var(--font-mono); font-weight:700; font-size:16px; color:var(--navy); margin-bottom:4px; }
+  .ptag { font-size:13px; color:var(--blue); font-weight:500; margin-bottom:10px; }
+  .pdesc { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:14px; }
+  .pspecs { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:16px; }
+  .spec-chip { font-family:var(--font-mono); font-size:10px; font-weight:600; background:var(--blue-light); color:var(--blue); padding:3px 10px; border-radius:2px; }
+  .plink { font-family:var(--font-mono); font-size:12px; font-weight:700; letter-spacing:1px; color:var(--blue); text-transform:uppercase; text-decoration:none; border-bottom:1.5px solid transparent; transition:border-color .2s; }
+  .plink:hover { border-bottom-color:var(--blue); }
+  .phidden { display:none !important; }
+
+  /* MEETING */
+  .meeting-bg { background:var(--white); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .meeting-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:72px; align-items:start; }
+  .mside p { font-size:16px; color:var(--muted); line-height:1.8; margin-bottom:36px; }
+  .info-list { display:flex; flex-direction:column; gap:10px; }
+  .info-item { display:flex; gap:14px; align-items:flex-start; padding:14px 16px; background:var(--bg); border:1px solid var(--border); border-radius:3px; }
+  .ii-icon { font-size:17px; flex-shrink:0; margin-top:2px; }
+  .ii-label { font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue); margin-bottom:3px; }
+  .ii-val { font-size:14px; color:var(--text); font-weight:500; }
+
+  /* FORM */
+  .fcard { background:var(--white); border:1px solid var(--border); border-radius:4px; padding:40px; position:relative; }
+  .fcard-tag { position:absolute; top:-13px; left:24px; background:var(--blue); color:#fff; font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:4px 14px; border-radius:2px; }
+  .fg { margin-bottom:16px; }
+  .fl { display:block; font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+  .fi, .fsel, .fta { width:100%; border:1.5px solid var(--border); background:var(--bg); color:var(--text); font-family:var(--font-ui); font-size:15px; padding:11px 13px; border-radius:3px; outline:none; transition:border-color .2s,box-shadow .2s; appearance:none; }
+  .fi:focus,.fsel:focus,.fta:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(27,79,255,.1); }
+  .fsel { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231b4fff' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 13px center; cursor:pointer; }
+  .fta { resize:vertical; min-height:88px; }
+  .frow { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .fsub { width:100%; background:var(--blue); color:#fff; font-family:var(--font-mono); font-weight:700; font-size:14px; letter-spacing:2px; text-transform:uppercase; padding:15px; border:none; border-radius:3px; cursor:pointer; transition:background .2s; margin-top:4px; }
+  .fsub:hover { background:var(--blue-dark); }
+  .fsub:disabled { background:var(--border-dark); cursor:not-allowed; }
+
+  /* SUCCESS */
+  .success-msg { display:none; text-align:center; padding:36px 24px; }
+  .s-icon { font-size:48px; margin-bottom:16px; }
+  .success-msg h3 { font-family:var(--font-display); font-size:28px; color:var(--navy); margin-bottom:8px; }
+  .s-ref { display:inline-block; background:var(--blue-light); color:var(--blue); font-family:var(--font-mono); font-size:22px; font-weight:700; padding:10px 24px; border-radius:3px; margin:12px 0; letter-spacing:2px; }
+  .success-msg p { font-size:14px; color:var(--muted); }
+
+  /* QUEUE */
+  .queue-bg { background:var(--bg); }
+  .qheader { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:16px; }
+  .qbadge { display:inline-flex; align-items:center; gap:8px; background:var(--blue-light); color:var(--blue); font-family:var(--font-mono); font-size:12px; font-weight:700; letter-spacing:1px; padding:6px 14px; border-radius:20px; margin-top:8px; }
+  .admin-row { display:flex; gap:8px; align-items:center; }
+  .admin-inp { border:1.5px solid var(--border); background:var(--white); font-family:var(--font-mono); font-size:13px; padding:8px 12px; border-radius:3px; outline:none; width:140px; color:var(--text); transition:border-color .2s; }
+  .admin-inp:focus { border-color:var(--blue); }
+  .abtn { font-family:var(--font-mono); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:8px 16px; border:1.5px solid var(--border-dark); background:var(--white); color:var(--text); border-radius:3px; cursor:pointer; transition:all .2s; white-space:nowrap; }
+  .abtn:hover { border-color:var(--blue); color:var(--blue); }
+  .abtn.danger:hover { border-color:var(--red); color:var(--red); }
+
+  .qtable-wrap { overflow-x:auto; }
+  .qtable { width:100%; border-collapse:collapse; background:var(--white); border:1px solid var(--border); border-radius:4px; overflow:hidden; font-size:14px; }
+  .qtable thead { background:var(--navy); color:#fff; }
+  .qtable thead th { font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:14px 16px; text-align:left; white-space:nowrap; }
+  .qtable tbody tr { border-bottom:1px solid var(--border); transition:background .15s; }
+  .qtable tbody tr:last-child { border-bottom:none; }
+  .qtable tbody tr:hover { background:var(--blue-light); }
+  .qtable td { padding:13px 16px; vertical-align:middle; white-space:nowrap; }
+  .qtable td.wrap { white-space:normal; max-width:160px; }
+  .qnum { font-family:var(--font-mono); font-weight:700; color:var(--muted-light); font-size:13px; }
+  .qname { font-weight:600; color:var(--navy); }
+  .qorg { color:var(--muted); font-size:13px; }
+  .spill { display:inline-block; font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:4px 12px; border-radius:20px; }
+  .spill.pending { background:#fff8e1; color:#b07800; }
+  .spill.confirmed { background:#e3f4eb; color:#1a7a3e; }
+  .spill.cancelled { background:#fde8e8; color:var(--red); }
+
+  .qempty { text-align:center; padding:72px 24px; color:var(--muted); font-family:var(--font-mono); font-size:13px; letter-spacing:2px; text-transform:uppercase; border:1px solid var(--border); border-radius:4px; background:var(--white); }
+
+  .apanel { display:none; background:var(--white); border:1px solid var(--border); border-radius:4px; padding:18px 22px; margin-top:16px; align-items:center; gap:10px; flex-wrap:wrap; }
+  .apanel.visible { display:flex; }
+  .apanel-lbl { font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue); margin-right:4px; }
+
+  /* FOOTER */
+  footer { background:var(--navy); color:rgba(255,255,255,.7); padding:48px 52px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px; }
+  .flogo { font-family:var(--font-mono); font-weight:700; font-size:20px; letter-spacing:3px; color:#fff; text-transform:uppercase; }
+  .flogo span { color:var(--blue-mid); }
+  .fmid { font-size:13px; text-align:center; }
+  .fright { font-size:13px; text-align:right; }
+  .fright a { color:var(--blue-mid); text-decoration:none; }
+
+  /* TOAST */
+  .toast { position:fixed; bottom:28px; right:28px; background:var(--navy); color:#fff; padding:14px 22px; border-radius:4px; font-family:var(--font-mono); font-size:13px; letter-spacing:1px; z-index:9999; transform:translateY(80px); opacity:0; transition:all .3s; box-shadow:0 4px 20px rgba(0,0,0,.2); }
+  .toast.show { transform:none; opacity:1; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; }
+  .reveal.visible { opacity:1; transform:none; }
+
+  ::-webkit-scrollbar { width:6px; height:6px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--border-dark); border-radius:3px; }
+  ::-webkit-scrollbar-thumb:hover { background:var(--blue); }
+
+  @media(max-width:960px) {
+    .hero,.meeting-grid { grid-template-columns:1fr; }
+    .hero { min-height:auto; padding-top:100px; }
+    nav { padding:0 24px; }
+    .section { padding:60px 24px; }
+    .stats-strip { grid-template-columns:1fr 1fr; }
+    footer { padding:36px 24px; }
+    .fmid,.fright { text-align:left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ALFA<span>SIS</span></div>
+  <div class="nav-center"><div class="live-dot"></div>IDEF 2025 · Istanbul · May 5–9</div>
+  <a class="nav-cta" href="#meeting">Book a Meeting</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">IDEF 2025 · Istanbul Expo Center · Hall 10</div>
+    <h1 class="hero-title">Advanced<br><em>Defense</em><br>Systems</h1>
+    <p class="hero-desc">Alfasis presents its full portfolio of electronic warfare, counter-UAV jamming, and tactical drone systems at IDEF 2025. Meet our engineers. Schedule your private briefing.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#meeting">Request a Meeting →</a>
+      <a class="btn-outline" href="#products">View Portfolio</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="countdown-card">
+      <div class="cd-top">Fair Opens In</div>
+      <div class="cd-grid">
+        <div class="cd-item"><span class="cd-num" id="days">00</span><span class="cd-lbl">Days</span></div>
+        <div class="cd-item"><span class="cd-num" id="hours">00</span><span class="cd-lbl">Hours</span></div>
+        <div class="cd-item"><span class="cd-num" id="minutes">00</span><span class="cd-lbl">Min</span></div>
+        <div class="cd-item"><span class="cd-num" id="seconds">00</span><span class="cd-lbl">Sec</span></div>
+      </div>
+      <div class="cd-info">
+        <div class="cd-row"><span class="cd-icon">📍</span>Istanbul Expo Center (TÜYAP), Hall 10</div>
+        <div class="cd-row"><span class="cd-icon">📅</span>May 5–9, 2025 · 09:00 – 18:00</div>
+        <div class="cd-row"><span class="cd-icon">🤝</span>Private briefings by appointment</div>
+        <div class="cd-row"><span class="cd-icon">✉️</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6c05020a032c0d000a0d1f051f420f0301">[email&#160;protected]</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-strip reveal">
+  <div class="stat-block"><div class="stat-num">33+</div><div class="stat-lbl">Defense Systems</div></div>
+  <div class="stat-block"><div class="stat-num">360°</div><div class="stat-lbl">UAV Coverage</div></div>
+  <div class="stat-block"><div class="stat-num">1000km</div><div class="stat-lbl">Max Strike Range</div></div>
+  <div class="stat-block"><div class="stat-num">5</div><div class="stat-lbl">Fair Days</div></div>
+</div>
+
+<!-- PRODUCTS -->
+<div id="products">
+  <div class="section">
+    <div class="eyebrow">Product Portfolio</div>
+    <h2 class="sec-title reveal">Systems on Display</h2>
+    <div class="filter-wrap">
+      <button class="ftab active" onclick="filterCat('all',this)">All Systems</button>
+      <button class="ftab" onclick="filterCat('ew',this)">Electronic Warfare</button>
+      <button class="ftab" onclick="filterCat('drone',this)">Drone Systems</button>
+      <button class="ftab" onclick="filterCat('detect',this)">Detection</button>
+    </div>
+    <div class="pgrid" id="productGrid"></div>
+  </div>
+</div>
+
+<!-- MEETING -->
+<div class="meeting-bg" id="meeting">
+  <div class="section">
+    <div class="eyebrow">Schedule Your Visit</div>
+    <h2 class="sec-title reveal">Request a Meeting</h2>
+    <div class="meeting-grid">
+      <div class="mside reveal">
+        <p>Meet our engineers and product specialists on-site at IDEF 2025. Meeting slots are limited — submit your request and we'll confirm within 24 hours.</p>
+        <div class="info-list">
+          <div class="info-item"><div class="ii-icon">📍</div><div><div class="ii-label">Location</div><div class="ii-val">Istanbul Expo Center (TÜYAP), Hall 10</div></div></div>
+          <div class="info-item"><div class="ii-icon">📅</div><div><div class="ii-label">Fair Dates</div><div class="ii-val">May 5–9, 2025 · Daily 09:00 – 18:00</div></div></div>
+          <div class="info-item"><div class="ii-icon">⏱</div><div><div class="ii-label">Session Duration</div><div class="ii-val">30-minute briefing slots</div></div></div>
+          <div class="info-item"><div class="ii-icon">👥</div><div><div class="ii-label">Who You'll Meet</div><div class="ii-val">Product Engineers · Business Development</div></div></div>
+          <div class="info-item"><div class="ii-icon">✉️</div><div><div class="ii-label">Contact</div><div class="ii-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="731a1d151c33121f1512001a005d101c1e">[email&#160;protected]</a> · +90 536 446 11 35</div></div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="fcard">
+          <div class="fcard-tag">Meeting Request</div>
+          <form id="meetingForm">
+            <div class="frow"><div class="fg"><label class="fl">First Name *</label><input class="fi" id="fn" placeholder="John" required></div><div class="fg"><label class="fl">Last Name *</label><input class="fi" id="ln" placeholder="Smith" required></div></div>
+            <div class="fg"><label class="fl">Organization *</label><input class="fi" id="org" placeholder="Ministry / Company" required></div>
+            <div class="frow"><div class="fg"><label class="fl">Country *</label><input class="fi" id="country" placeholder="Country" required></div><div class="fg"><label class="fl">Work Email *</label><input class="fi" type="email" id="email" placeholder="you@org.com" required></div></div>
+            <div class="frow">
+              <div class="fg"><label class="fl">Preferred Day *</label><select class="fsel" id="day" required><option value="">Select Day</option><option>May 5 — Monday</option><option>May 6 — Tuesday</option><option>May 7 — Wednesday</option><option>May 8 — Thursday</option><option>May 9 — Friday</option></select></div>
+              <div class="fg"><label class="fl">Time Slot *</label><select class="fsel" id="slot" required><option value="">Select Time</option><option>09:00 – 09:30</option><option>09:30 – 10:00</option><option>10:00 – 10:30</option><option>10:30 – 11:00</option><option>11:00 – 11:30</option><option>11:30 – 12:00</option><option>13:00 – 13:30</option><option>13:30 – 14:00</option><option>14:00 – 14:30</option><option>14:30 – 15:00</option><option>15:00 – 15:30</option><option>15:30 – 16:00</option><option>16:00 – 16:30</option><option>16:30 – 17:00</option></select></div>
+            </div>
+            <div class="fg"><label class="fl">Products of Interest</label><select class="fsel" id="interest"><option value="">Select Category</option><option>Counter-UAV Jammers</option><option>Tactical Drone Systems</option><option>Kamikaze / Strike UAVs</option><option>UAV Detection Systems</option><option>IED / EW Systems</option><option>Naval / Maritime Systems</option><option>Full Portfolio Briefing</option></select></div>
+            <div class="fg"><label class="fl">Additional Notes</label><textarea class="fta" id="notes" placeholder="Specific requirements or topics to discuss..."></textarea></div>
+            <button type="submit" class="fsub" id="submitBtn">Submit Meeting Request →</button>
+          </form>
+          <div class="success-msg" id="successMsg">
+            <div class="s-icon">✅</div>
+            <h3>Request Received</h3>
+            <div style="color:var(--muted);font-size:14px;margin-bottom:4px">Your queue reference:</div>
+            <div class="s-ref" id="queueRef"></div>
+            <p>Our team will confirm your slot within 24 hours via email.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUEUE -->
+<div class="queue-bg" id="queue-section">
+  <div class="section">
+    <div class="qheader">
+      <div>
+        <div class="eyebrow">Live Schedule</div>
+        <h2 class="sec-title" style="margin-bottom:8px">Meeting Queue</h2>
+        <div class="qbadge"><div class="live-dot"></div><span id="queueCount">0 requests</span></div>
+      </div>
+      <div>
+        <div class="admin-row">
+          <input type="password" class="admin-inp" id="adminPwd" placeholder="Admin PIN">
+          <button class="abtn" onclick="adminLogin()">Access</button>
+        </div>
+      </div>
+    </div>
+    <div id="queueWrap"><div class="qempty">No meetings scheduled yet</div></div>
+    <div class="apanel" id="adminPanel">
+      <span class="apanel-lbl">Admin</span>
+      <button class="abtn" onclick="exportCSV()">↓ Export CSV</button>
+      <button class="abtn" onclick="confirmAll()">✓ Confirm All Pending</button>
+      <button class="abtn danger" onclick="clearQueue()">✕ Clear All</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">ALFA<span>SIS</span></div>
+  <div class="fmid">IDEF 2025 · Istanbul Expo Center (TÜYAP), Hall 10<br>May 5–9, 2025</div>
+  <div class="fright"><a href="/cdn-cgi/l/email-protection#523b3c343d12333e3433213b217c313d3f"><span class="__cf_email__" data-cfemail="1d74737b725d7c717b7c6e746e337e7270">[email&#160;protected]</span></a><br>+90 536 446 11 35</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const BASE = 'https://www.rdnsoft.com/products';
+const products = [
+  {cat:'ew',   slug:'alfa-850v',               imgFile:'hero.webp',     name:'ALFA Drone-UAV Jammer',  tagline:'Fixed-Site 360° Counter-UAV',    desc:'Continuous 24/7 RF suppression across all UAV control, GNSS, telemetry and video frequencies. Omnidirectional coverage from a single installation point.',  specs:['24/7 Operation','360° Coverage','All Weather','GNSS Suppression']},
+  {cat:'ew',   slug:'alfa-850v-mobile',         imgFile:'hero.webp',     name:'ALFA 850V Mobile',       tagline:'Vehicle-Mounted Counter-UAV',     desc:'Roof-mounted mobile EW system delivering 360° RF suppression while stationary or in motion. Integrates into standard tactical vehicles.',                specs:['Mobile','360° Coverage','9 dBi','On-the-Move']},
+  {cat:'ew',   slug:'alfa-tank',                imgFile:'hero.webp',     name:'ALFA TANK',              tagline:'Armored Platform Counter-UAV',    desc:'Purpose-built for direct integration on tank turrets and armored vehicle hulls. Operates on DC 24V vehicle power, no external supply needed.',            specs:['Tank Integration','DC 24V','Ruggedized','Compact']},
+  {cat:'ew',   slug:'alfa-naval',               imgFile:'hero.webp',     name:'ALFA NAVAL',             tagline:'Maritime Counter-UAV',            desc:'Marine-grade counter-UAV jamming for naval vessels, patrol boats and sea platforms. Salt-air and high-humidity resistant enclosure.',                      specs:['Marine Grade','220V AC/24V DC','Port Security','Coastal Defense']},
+  {cat:'ew',   slug:'vega',                     imgFile:'vega-hero.webp',name:'VEGA Directional Jammer',tagline:'Long-Range Directional EW',       desc:'High-power directional electronic warfare system for long-range RF denial, perimeter security, and strategic counter-UAV operations.',                   specs:['Directional','Long-Range','High-Power','Perimeter']},
+  {cat:'ew',   slug:'ied-jammer',               imgFile:'hero.webp',     name:'IED Jammer',             tagline:'Remote-Controlled Bomb Blocking', desc:'Receiver-blind technology neutralizes IED triggers across 315/433 MHz, LoRa, GSM, GNSS and all known detonation frequencies.',                          specs:['Receiver-Blind','Full Frequency','GSM Coverage','Low Power']},
+  {cat:'detect',slug:'uav-detection-radar',     imgFile:'hero.webp',     name:'UAV Detection Radar',    tagline:'Wide-Area Radar Detection',       desc:'Advanced radar detecting small UAVs at extended ranges with 360° scanning, automatic tracking, and early warning capability.',                            specs:['360° Scan','Micro-UAV','Auto-Track','Early Warning']},
+  {cat:'detect',slug:'rf-uav-detection',        imgFile:'hero.webp',     name:'RF UAV Detection',       tagline:'Passive Silent Detection',        desc:'Identifies drones by analyzing their own RF emissions — completely covert, zero emission signature, real-time alerting.',                                   specs:['Passive RF','Zero Emission','Real-Time','Covert']},
+  {cat:'detect',slug:'optical-uav-detection',   imgFile:'hero.webp',     name:'Optical UAV Detection',  tagline:'AI Day & Night Vision',           desc:'Camera-based UAV detection using machine learning for automatic identification and tracking in day and night conditions.',                                  specs:['AI-Based','Night Vision','24/7','Low False Alarm']},
+  {cat:'detect',slug:'dr100-ab-8',              imgFile:'hero.webp',     name:'DR100-AB-8',             tagline:'360° Mobile at 150 km/h',         desc:'Vehicle-mounted integrated detection and jamming. 5 km detection range, 3 km jamming, full-frequency coverage at convoy speed.',                          specs:['5km Detection','3km Jamming','150 km/h','Autonomous']},
+  {cat:'drone', slug:'barracuda',               imgFile:'hero.webp',     name:'ALFA UAS',               tagline:'Airborne ISR & EW Platform',      desc:'Mission-adaptive VTOL UAS for ISR, airborne electronic warfare, and high-value tactical overwatch. Up to 8-hour endurance.',                             specs:['8H Endurance','VTOL','Airborne EW','ISR']},
+  {cat:'drone', slug:'white-falcon-a1',         imgFile:'hero.webp',     name:'WHITE FALCON A1',        tagline:'Precision Strike at 400+ km/h',   desc:'Compact high-speed FPV attack drone with 50 Hz AI guidance, 1 kg payload, and 400+ km/h top speed for precision strike missions.',                      specs:['400+ km/h','1 kg Payload','AI Guidance','FPV']},
+  {cat:'drone', slug:'d-1050',                  imgFile:'hero.webp',     name:'D-1050',                 tagline:'Jam-Proof Fiber Optic Strike',    desc:'FPV kamikaze drone with fiber optic cable link — completely unjammable and GPS-denied operation. 1–5 kg payload, 25 km range.',                          specs:['Fiber Optic','GPS-Denied','25 km Range','Jam-Proof']},
+  {cat:'drone', slug:'km-1000',                 imgFile:'hero.webp',     name:'KM-1000',                tagline:'1,000 km Strategic Strike',       desc:'Stealth-configured fixed-wing kamikaze with 15 kg payload, 9-hour endurance, and 1,000 km strategic strike range.',                                      specs:['1000 km','15 kg Payload','9H Endurance','Stealth']},
+  {cat:'drone', slug:'talon',                   imgFile:'hero.webp',     name:'TALON',                  tagline:'Hand-Launch Reconnaissance UAV',  desc:'Electric-powered fixed-wing mini UAV for tactical recon and border security. No runway required. Low radar cross-section.',                              specs:['Hand-Launch','50–100 Min','Low RCS','Portable']},
+  {cat:'drone', slug:'yukbey',                  imgFile:'hero.webp',     name:'YÜKBEY',                 tagline:'30 kg Heavy Lift Cargo Drone',    desc:'Heavy lift logistics drone with dual battery failover system for safe, uninterrupted aerial logistics over up to 30 km.',                               specs:['30 kg Payload','30 km Range','Dual Battery','Auto-Failover']},
+  {cat:'drone', slug:'safir',                   imgFile:'hero.webp',     name:'SAFIR',                  tagline:'High-Speed FPV Platform',         desc:'Advanced FPV drone designed for professional missions. 150–200+ km/h with immersive goggle control for day and night operations.',                        specs:['200+ km/h','FPV Control','Day/Night','Long Range']},
+  {cat:'drone', slug:'k-400',                   imgFile:'hero.webp',     name:'K-400',                  tagline:'400 km Extended Strike',          desc:'Fixed-wing kamikaze UAV with 5 kg payload, 4-hour loitering endurance, and 400 km operational range for strategic strike.',                             specs:['400 km','5 kg Payload','4H Endurance','Loitering']},
+];
+
+const catLabels = {ew:'Electronic Warfare', drone:'Drone System', detect:'Detection'};
+
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = products.map((p,i) => {
+    const src = `${BASE}/${p.slug}/images/${p.imgFile}`;
+    return `<div class="pcard reveal" data-cat="${p.cat}" style="transition-delay:${(i%6)*.07}s">
+      <div class="pimg-wrap">
+        <img class="pimg" src="${src}" alt="${p.name}" loading="lazy">
+        <div class="pcat-pill">${catLabels[p.cat]}</div>
+      </div>
+      <div class="pbody">
+        <div class="pname">${p.name}</div>
+        <div class="ptag">${p.tagline}</div>
+        <div class="pdesc">${p.desc}</div>
+        <div class="pspecs">${p.specs.map(s=>`<span class="spec-chip">${s}</span>`).join('')}</div>
+        <a class="plink" href="#meeting" onclick="prefill('${p.cat}')">Request Briefing →</a>
+      </div>
+    </div>`;
+  }).join('');
+  observeReveals();
+}
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.pcard').forEach(c=>c.classList.toggle('phidden', cat!=='all' && c.dataset.cat!==cat));
+}
+
+function prefill(cat) {
+  const m={ew:'Counter-UAV Jammers',drone:'Tactical Drone Systems',detect:'UAV Detection Systems'};
+  if(m[cat]) document.getElementById('interest').value=m[cat];
+}
+
+// Countdown
+function tick() {
+  const diff = new Date('2025-05-05T09:00:00+03:00') - new Date();
+  if(diff<=0){['days','hours','minutes','seconds'].forEach(id=>document.getElementById(id).textContent='00');return;}
+  document.getElementById('days').textContent    = String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('hours').textContent   = String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
+  document.getElementById('minutes').textContent = String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+  document.getElementById('seconds').textContent = String(Math.floor(diff%60000/1000)).padStart(2,'0');
+}
+setInterval(tick,1000); tick();
+
+// Queue
+let queue=[]; try{queue=JSON.parse(localStorage.getItem('alf_q')||'[]');}catch(e){}
+let isAdmin=false;
+function saveQ(){try{localStorage.setItem('alf_q',JSON.stringify(queue));}catch(e){}}
+
+function renderQueue() {
+  document.getElementById('queueCount').textContent=`${queue.length} request${queue.length!==1?'s':''}`;
+  const w=document.getElementById('queueWrap');
+  if(!queue.length){w.innerHTML=`<div class="qempty">No meetings scheduled yet</div>`;return;}
+  w.innerHTML=`<div class="qtable-wrap"><table class="qtable">
+    <thead><tr><th>#</th><th>Name</th><th>Organization</th><th>Appointment</th><th>Interest</th><th>Status</th>${isAdmin?'<th>Actions</th>':''}</tr></thead>
+    <tbody>${queue.map((q,i)=>`<tr>
+      <td class="qnum">${String(i+1).padStart(2,'0')}</td>
+      <td><div class="qname">${q.fn} ${q.ln}</div><div style="font-family:var(--font-mono);font-size:11px;color:var(--muted-light);letter-spacing:1px">${q.ref}</div></td>
+      <td class="wrap"><div class="qname">${q.org}</div><div class="qorg">${q.country}</div></td>
+      <td><div style="font-weight:600">${q.day}</div><div class="qorg">${q.slot}</div></td>
+      <td class="qorg wrap">${q.interest||'—'}</td>
+      <td><span class="spill ${q.status}">${q.status}</span></td>
+      ${isAdmin?`<td><button class="abtn" style="margin-right:4px;padding:5px 10px" onclick="chStatus(${i},'confirmed')">✓</button><button class="abtn danger" style="padding:5px 10px" onclick="chStatus(${i},'cancelled')">✕</button></td>`:''}
+    </tr>`).join('')}</tbody></table></div>`;
+}
+
+function genRef(){return 'ALF-'+Math.random().toString(36).slice(2,7).toUpperCase();}
+
+// ── FORMSPREE KURULUM ──────────────────────────────────────────
+// 1. formspree.io adresine git, ücretsiz hesap aç
+// 2. "New Form" oluştur, endpoint ID'ni kopyala (örn: xpwzgkqb)
+// 3. Aşağıdaki YOUR_FORM_ID yerine o ID'yi yaz
+const FORMSPREE_ID = 'YOUR_FORM_ID';
+
+document.getElementById('meetingForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  const ref = genRef();
+  const payload = {
+    _subject: `[IDEF 2025] Meeting Request — ${document.getElementById('fn').value} ${document.getElementById('ln').value} / ${document.getElementById('org').value}`,
+    _replyto:     document.getElementById('email').value,
+    reference:    ref,
+    first_name:   document.getElementById('fn').value,
+    last_name:    document.getElementById('ln').value,
+    organization: document.getElementById('org').value,
+    country:      document.getElementById('country').value,
+    email:        document.getElementById('email').value,
+    day:          document.getElementById('day').value,
+    slot:         document.getElementById('slot').value,
+    interest:     document.getElementById('interest').value,
+    notes:        document.getElementById('notes').value,
+    timestamp:    new Date().toISOString(),
+  };
+
+  try {
+    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error();
+
+    queue.push({ref, fn:payload.first_name, ln:payload.last_name, org:payload.organization,
+      country:payload.country, email:payload.email, day:payload.day, slot:payload.slot,
+      interest:payload.interest, notes:payload.notes, status:'pending', ts:payload.timestamp});
+    saveQ(); renderQueue();
+    document.getElementById('queueRef').textContent = ref;
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('meetingForm').style.display = 'none';
+    toast('Meeting request sent ✓');
+    setTimeout(()=>document.getElementById('queue-section').scrollIntoView({behavior:'smooth'}), 600);
+
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = 'Submit Meeting Request →';
+    toast('Sending failed — please try again or email us directly');
+  }
+});
+
+function adminLogin(){
+  if(document.getElementById('adminPwd').value==='2025'){isAdmin=true;document.getElementById('adminPanel').classList.add('visible');renderQueue();toast('Admin mode active');}
+  else toast('Invalid PIN');
+}
+function chStatus(i,s){queue[i].status=s;saveQ();renderQueue();toast(`${queue[i].ref} → ${s}`);}
+function confirmAll(){queue=queue.map(q=>({...q,status:q.status==='pending'?'confirmed':q.status}));saveQ();renderQueue();toast('All pending confirmed');}
+function clearQueue(){if(confirm('Clear all meetings?')){queue=[];saveQ();renderQueue();toast('Queue cleared');}}
+function exportCSV(){
+  const h=['Ref','First','Last','Org','Country','Email','Day','Slot','Interest','Status','Notes','Timestamp'];
+  const rows=queue.map(q=>[q.ref,q.fn,q.ln,q.org,q.country,q.email,q.day,q.slot,q.interest,q.status,q.notes,q.ts]);
+  const csv=[h,...rows].map(r=>r.map(c=>`"${(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([csv],{type:'text/csv'})),download:`alfasis-meetings-${new Date().toISOString().slice(0,10)}.csv`}).click(
