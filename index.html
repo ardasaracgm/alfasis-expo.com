@@ -40,24 +40,26 @@
   .nav-cta { background: var(--blue); color: #fff; font-family: var(--font-mono); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; padding: 10px 24px; border: none; cursor: pointer; text-decoration: none; border-radius: 2px; transition: background .2s; }
   .nav-cta:hover { background: var(--blue-dark); }
 
-  /* HERO */
-  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 100px 52px 60px; gap: 60px; background: var(--white); position: relative; overflow: hidden; }
-  .hero::after { content:''; position:absolute; top:-200px; right:-200px; width:700px; height:700px; background:radial-gradient(circle,rgba(27,79,255,.07) 0%,transparent 70%); pointer-events:none; }
-  .hero-eyebrow { display:inline-flex; align-items:center; gap:8px; background:var(--blue-light); color:var(--blue); font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; border-radius:2px; margin-bottom:28px; opacity:0; animation:fadeUp .7s .1s forwards; }
+  /* HERO — VIDEO BG */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 100px 52px 60px; gap: 60px; position: relative; overflow: hidden; background: #06080f; }
+  .hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; z-index:0; opacity:.55; }
+  .hero-overlay { position:absolute; inset:0; background: linear-gradient(135deg, rgba(10,22,64,.80) 0%, rgba(6,8,15,.65) 50%, rgba(10,22,64,.75) 100%); z-index:1; }
+  .hero > div { position:relative; z-index:2; }
+  .hero-eyebrow { display:inline-flex; align-items:center; gap:8px; background:rgba(232,238,255,.12); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.15); color:#fff; font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:6px 14px; border-radius:2px; margin-bottom:28px; opacity:0; animation:fadeUp .7s .1s forwards; }
   .hero-eyebrow::before { content:''; width:6px; height:6px; background:var(--blue); border-radius:50%; animation:pulse 1.5s infinite; }
-  .hero-title { font-family:var(--font-display); font-size:clamp(44px,5.5vw,84px); line-height:1.05; color:var(--navy); margin-bottom:24px; opacity:0; animation:fadeUp .7s .25s forwards; }
-  .hero-title em { font-style:italic; color:var(--blue); }
-  .hero-desc { font-size:17px; color:var(--muted); line-height:1.7; margin-bottom:40px; max-width:480px; opacity:0; animation:fadeUp .7s .4s forwards; }
+  .hero-title { font-family:var(--font-display); font-size:clamp(44px,5.5vw,84px); line-height:1.05; color:#fff; margin-bottom:24px; opacity:0; animation:fadeUp .7s .25s forwards; }
+  .hero-title em { font-style:italic; color:#6b9fff; }
+  .hero-desc { font-size:17px; color:rgba(255,255,255,.72); line-height:1.7; margin-bottom:40px; max-width:480px; opacity:0; animation:fadeUp .7s .4s forwards; }
   .hero-actions { display:flex; gap:12px; flex-wrap:wrap; opacity:0; animation:fadeUp .7s .55s forwards; }
   .btn-primary { background:var(--blue); color:#fff; font-family:var(--font-mono); font-weight:700; font-size:14px; letter-spacing:1px; text-transform:uppercase; padding:16px 36px; border:none; cursor:pointer; text-decoration:none; border-radius:2px; transition:background .2s,transform .15s; display:inline-block; }
   .btn-primary:hover { background:var(--blue-dark); transform:translateY(-1px); }
-  .btn-outline { border:1.5px solid var(--border-dark); color:var(--text); font-family:var(--font-mono); font-weight:500; font-size:14px; letter-spacing:1px; text-transform:uppercase; padding:16px 36px; cursor:pointer; text-decoration:none; border-radius:2px; transition:border-color .2s,color .2s; display:inline-block; background:transparent; }
-  .btn-outline:hover { border-color:var(--blue); color:var(--blue); }
+  .btn-outline { border:1.5px solid rgba(255,255,255,.35); color:#fff; font-family:var(--font-mono); font-weight:500; font-size:14px; letter-spacing:1px; text-transform:uppercase; padding:16px 36px; cursor:pointer; text-decoration:none; border-radius:2px; transition:border-color .2s,background .2s; display:inline-block; background:rgba(255,255,255,.08); backdrop-filter:blur(6px); }
+  .btn-outline:hover { border-color:#fff; background:rgba(255,255,255,.18); }
 
-  /* COUNTDOWN CARD */
+  /* COUNTDOWN CARD — glassmorphism */
   .hero-right { opacity:0; animation:fadeUp .7s .5s forwards; }
-  .countdown-card { background:var(--navy); color:#fff; padding:48px 40px; border-radius:4px; position:relative; overflow:hidden; }
-  .countdown-card::before { content:''; position:absolute; top:-80px; right:-80px; width:250px; height:250px; background:radial-gradient(circle,rgba(27,79,255,.35) 0%,transparent 70%); }
+  .countdown-card { background:rgba(10,22,64,.55); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,.15); color:#fff; padding:48px 40px; border-radius:4px; position:relative; overflow:hidden; }
+  .countdown-card::before { content:''; position:absolute; top:-80px; right:-80px; width:250px; height:250px; background:radial-gradient(circle,rgba(27,79,255,.4) 0%,transparent 70%); }
   .cd-top { font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:32px; position:relative; }
   .cd-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; margin-bottom:36px; }
   .cd-item { position:relative; text-align:center; }
@@ -65,7 +67,7 @@
   .cd-num { font-family:var(--font-mono); font-weight:700; font-size:clamp(36px,4vw,52px); color:#fff; display:block; line-height:1; margin-bottom:6px; }
   .cd-lbl { font-family:var(--font-mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.4); }
   .cd-info { border-top:1px solid rgba(255,255,255,.1); padding-top:24px; display:flex; flex-direction:column; gap:10px; }
-  .cd-row { display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,.7); }
+  .cd-row { display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:13px; color:rgba(255,255,255,.85); }
   .cd-icon { font-size:15px; flex-shrink:0; }
 
   /* STATS */
@@ -211,6 +213,10 @@
 
 <!-- HERO -->
 <div class="hero">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="https://www.rdnsoft.com/products/barracuda/videos/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
   <div>
     <div class="hero-eyebrow">SAHA EXPO 2026 · Istanbul Fuar Merkezi (İFM)</div>
     <h1 class="hero-title">Advanced<br><em>Defense</em><br>Systems</h1>
